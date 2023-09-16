@@ -84,17 +84,6 @@ public class CamSystemManager : MonoBehaviour
                     camButtons[i].interactable = true;
                 }
                 break;
-            case CamType.PartyRoom:
-                camButtons[8].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
-                {
-                    if (i == 8)
-                    {
-                        continue;
-                    }
-                    camButtons[i].interactable = true;
-                }
-                break;
             case CamType.PartsAndService:
                 camButtons[3].interactable = false;
                 for (int i = 0; i < camButtons.Count; i++)
@@ -146,6 +135,17 @@ public class CamSystemManager : MonoBehaviour
                 for (int i = 0; i < camButtons.Count; i++)
                 {
                     if (i == 7)
+                    {
+                        continue;
+                    }
+                    camButtons[i].interactable = true;
+                }
+                break;
+            case CamType.PartyRoom:
+                camButtons[8].interactable = false;
+                for (int i = 0; i < camButtons.Count; i++)
+                {
+                    if (i == 8)
                     {
                         continue;
                     }

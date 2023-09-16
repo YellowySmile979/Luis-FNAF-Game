@@ -6,7 +6,14 @@ public class AnimatronicManager : MonoBehaviour
 {
     [Header("Checks")]
     public bool allAnimsCanAttack;
-    
+
+    [Header("Animatronics")]
+    public GameObject mia;
+    public GameObject shaun, jade, elijah, enQi;
+
+    [Header("Prevention Measures")]
+    public bool isLeftDoorClosed = false;
+    public bool isRightDoorClosed = false;
 
     public static AnimatronicManager Instance;
 
@@ -24,6 +31,18 @@ public class AnimatronicManager : MonoBehaviour
     void Update()
     {
         
+    }
+    //handles the closing and opening of left door
+    public void LeftDoor()
+    {
+        isLeftDoorClosed = !isLeftDoorClosed;
+        //play anim for closed door
+    }
+    //handles the closing and opening of right door
+    public void RightDoor()
+    {
+        isRightDoorClosed = !isRightDoorClosed;
+        //play anim for closed door
     }
 }
 public enum AnimatronicType

@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MainStage
+  - MainHall1
+  - MainHall2
+  - Parts&Service
+  - Kitchen
+  - EastHallway
+  - WestHallway
+  - Storage
+  - PartyRoom
+  - Entrance
+  - WaitingtoKill
   layers:
   - Default
   - TransparentFX
