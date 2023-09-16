@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AnimatronicManager : MonoBehaviour
 {
+    [Header("Checks")]
+    public bool allAnimsCanAttack;
+    
+
     public static AnimatronicManager Instance;
 
     void Awake()
@@ -21,4 +25,12 @@ public class AnimatronicManager : MonoBehaviour
     {
         
     }
+}
+public enum AnimatronicType
+{
+    Mia,
+    Shaun,
+    Jade,
+    Elijah,
+    EnQi
 }

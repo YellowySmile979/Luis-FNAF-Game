@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ScriptableCams", menuName = "camData/camData")]
+[CreateAssetMenu(fileName = "CamData", menuName = "ScriptableCams/CamData")]
 public class ScriptableCams : ScriptableObject
 {
     public CamType camType;

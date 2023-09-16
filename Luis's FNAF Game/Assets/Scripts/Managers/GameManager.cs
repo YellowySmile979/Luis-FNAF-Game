@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("Night Progress")]
     bool nightHasStarted = false;
     public float maxNightTime = 300f;
-    float nightTime;
+    [SerializeField] float nightTime;
 
     public static GameManager Instance;
 
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         if(nightHasStarted)
         {
             nightTime -= Time.deltaTime;
+            UIManager.Instance.NightTimerProgress(nightTime);
         }
 
         if (GameState == GameState.Start)
@@ -40,18 +41,19 @@ public class GameManager : MonoBehaviour
         else if(GameState == GameState.NotDeadYet)
         {
             nightHasStarted = true;
+            AnimatronicManager.Instance.allAnimsCanAttack = true;
         }
         else if(GameState == GameState.Win)
         {
-
+            AnimatronicManager.Instance.allAnimsCanAttack = false;
         }
-        else if(GameState == GameState.Win)
+        else if(GameState == GameState.Dying)
         {
-
+            AnimatronicManager.Instance.allAnimsCanAttack = false;
         }
         else if(GameState == GameState.Lose)
         {
-
+            AnimatronicManager.Instance.allAnimsCanAttack = false;
         }
     }
 }
