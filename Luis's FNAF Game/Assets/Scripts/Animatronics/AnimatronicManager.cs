@@ -6,6 +6,7 @@ public class AnimatronicManager : MonoBehaviour
 {
     [Header("Checks")]
     public bool allAnimsCanAttack;
+    public bool miaCanAttack, shaunCanAttack, jadeCanAttack, elijahCanAttack, enQiCanAttack;
 
     [Header("Animatronics")]
     public GameObject mia;

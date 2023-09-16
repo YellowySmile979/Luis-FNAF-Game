@@ -31,7 +31,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AnimatronicBehaviour();
     }
 
     public virtual void AnimatronicBehaviour()

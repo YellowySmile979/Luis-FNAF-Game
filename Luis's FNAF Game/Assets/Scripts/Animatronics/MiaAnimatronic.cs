@@ -6,7 +6,7 @@ public class MiaAnimatronic : BaseAnimatronic
 {
     public override void AnimatronicBehaviour()
     {
-        
+        MiaMovement();
     }
     //handles the movement of mia
     public void MiaMovement()
@@ -26,6 +26,7 @@ public class MiaAnimatronic : BaseAnimatronic
             if (AnimatronicManager.Instance.mia.transform.position == whereToStart.transform.position)
             {
                 AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[1].transform.position;
+                whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
             }
             else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[1].transform.position)
             {
@@ -33,6 +34,7 @@ public class MiaAnimatronic : BaseAnimatronic
                 if (randomNumber > 40)
                 {
                     AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[6].transform.position;
+                    whereIAmNow.transform.position = listOfAllPlacesToMove[6].transform.position;
                 }
                 else
                 {
@@ -40,45 +42,87 @@ public class MiaAnimatronic : BaseAnimatronic
                     if(randomNo <= 30)
                     {
                         AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[4].transform.position;
+                        whereIAmNow.transform.position = listOfAllPlacesToMove[4].transform.position;
                     }
                     else if(randomNo > 30 && randomNo <= 60)
                     {
                         AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[9].transform.position;
+                        whereIAmNow.transform.position = listOfAllPlacesToMove[9].transform.position;
                     }
                     else
                     {
                         AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[3].transform.position;
+                        whereIAmNow.transform.position = listOfAllPlacesToMove[3].transform.position;
                     }
                 }                
             }
             else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[3].transform.position)
             {
                 AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[1].transform.position;
+                whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
             }
             else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[4].transform.position)
             {
                 AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[1].transform.position;
+                whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
             }
             else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[9].transform.position)
             {
                 AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[1].transform.position;
+                whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
             }
             else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[6].transform.position)
             {
                 float randomNumber = Random.Range(1, 100);
                 if(randomNumber <= 40)
                 {
-                    AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[8].transform.position;
+                    float randomNo = Random.Range(1, 100);
+                    if (randomNo <= 50)
+                    {
+                        AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[8].transform.position;
+                        whereIAmNow.transform.position = listOfAllPlacesToMove[8].transform.position;
+                    }
+                    else
+                    {
+                        AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[1].transform.position;
+                        whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+                    }
                 }
                 else
                 {
                     AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[10].transform.position;
+                    whereIAmNow.transform.position = listOfAllPlacesToMove[10].transform.position;
                 }
+            }
+            else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[8].transform.position)
+            {
+                AnimatronicManager.Instance.mia.transform.position = listOfAllPlacesToMove[6].transform.position;
+                whereIAmNow.transform.position = listOfAllPlacesToMove[6].transform.position;
+            }
+            else if(AnimatronicManager.Instance.mia.transform.position == listOfAllPlacesToMove[10].transform.position)
+            {
+                MiaAttack();
             }
         }
     }
+    //handles mia's attack
     public void MiaAttack()
     {
-
+        if (AnimatronicManager.Instance.isLeftDoorClosed)
+        {
+            AnimatronicManager.Instance.mia.transform.position = whereToStart.transform.position;
+            whereIAmNow.transform.position = listOfAllPlacesToMove[0].transform.position;
+        }
+        else
+        {
+            GameManager.Instance.GameState = GameState.Dying;
+            //mia attacks
+            PlayMiaAnimation();
+        }
+    }
+    //plays mia's animation
+    void PlayMiaAnimation()
+    {        
+        GameManager.Instance.GameState = GameState.Lose;
     }
 }
