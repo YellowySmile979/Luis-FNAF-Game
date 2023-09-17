@@ -630,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &109485999
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8258,6 +8258,7 @@ MonoBehaviour:
   - {fileID: 727887762}
   - {fileID: 208984782}
   - {fileID: 588902568}
+  ventCamButtons: []
 --- !u!4 &1721011632
 Transform:
   m_ObjectHideFlags: 0
@@ -10085,7 +10086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2070986607
 RectTransform:
   m_ObjectHideFlags: 0
