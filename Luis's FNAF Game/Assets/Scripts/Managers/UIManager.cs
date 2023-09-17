@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour
     [Header("Night Progress")]
     public Text time;
 
+    [Header("Battery")]
+    public Text batteryText;
+
     public static UIManager Instance;
 
     void Awake()
@@ -59,5 +62,12 @@ public class UIManager : MonoBehaviour
             setTime = 6;
         }
         time.text = setTime.ToString() + "am";
+    }
+    float batteryPercentage;
+    //handles the battery percentage
+    public void BatteryPercentage(float battPercent)
+    {       
+        batteryPercentage = battPercent / 10;
+        batteryText.text = Mathf.Round(batteryPercentage) + "%";
     }
 }

@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     public float maxNightTime = 300f;
     [SerializeField] float nightTime;
 
+    [Header("Power")]
+    public float maxPower = 1000f;
+    public float power;
+    public float usage = 1f;
+
     public static GameManager Instance;
 
     void Awake()
@@ -23,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.Start;
         nightTime = maxNightTime;
+        power = maxPower;
     }
 
     // Update is called once per frame
@@ -30,8 +36,9 @@ public class GameManager : MonoBehaviour
     {
         if(nightHasStarted)
         {
-            nightTime -= Time.deltaTime;
-            UIManager.Instance.NightTimerProgress(nightTime);
+            Night();
+            AnimatronicManager.Instance.UpdateAILevels(nightTime);
+            Power();
         }
 
         if (GameState == GameState.Start)
@@ -46,14 +53,45 @@ public class GameManager : MonoBehaviour
         else if(GameState == GameState.Win)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            //play win sequence
         }
         else if(GameState == GameState.Dying)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            //play dying sequence depending on which animatronic jumpscares Luis
         }
         else if(GameState == GameState.Lose)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            //happens if jump scare
+        }
+        else if(GameState == GameState.PowerOutage)
+        {
+            AnimatronicManager.Instance.allAnimsCanAttack = false;
+            //play the lights out part
+        }
+    }
+    //handles the night of the game
+    void Night()
+    {
+        nightTime -= Time.deltaTime;
+        UIManager.Instance.NightTimerProgress(nightTime);
+        if(nightTime <= 0)
+        {
+            GameState = GameState.Win;
+        }
+    }
+    //handles the power of the game
+    void Power()
+    {
+        if(power > 0)
+        {
+            power -= Time.deltaTime * usage;
+            UIManager.Instance.BatteryPercentage(power);
+        }
+        else
+        {
+            GameState = GameState.PowerOutage;
         }
     }
 }
@@ -63,7 +101,8 @@ public enum GameState
     Win,
     Lose,
     Dying,
-    NotDeadYet
+    NotDeadYet,
+    PowerOutage
 }
 public enum CamType
 {

@@ -8,6 +8,13 @@ public class CamSystemManager : MonoBehaviour
     [Header("Moniter")]
     public GameObject moniter;
     public bool openOrClose = false;
+    bool hasSentInitialCam;
+
+    public Button ventButton, mainButton;
+    public GameObject ventSys, mainSys;
+    public bool ventCam = false;
+
+    public GameObject leftSideStuff, rightSideStuff;
 
     [Header("Cams")]
     public GameObject moniterBG;
@@ -15,6 +22,7 @@ public class CamSystemManager : MonoBehaviour
     public float maxRandomNumber = 10;
 
     public List<Button> camButtons = new List<Button>();
+    public List<Button> ventCamButtons = new List<Button>();
 
     public static CamSystemManager Instance;
 
@@ -33,6 +41,25 @@ public class CamSystemManager : MonoBehaviour
     {
         
     }
+    //handles which cam to turn on
+    public void VentCamOrMainCam()
+    {
+        ventCam = !ventCam;
+        if (!ventCam)
+        {
+            mainButton.interactable = false;
+            ventButton.interactable = true;
+            mainSys.SetActive(true);
+            ventSys.SetActive(false);
+        }
+        else
+        {
+            ventButton.interactable = false;
+            mainButton.interactable = true;
+            mainSys.SetActive(false);
+            ventSys.SetActive(true);
+        }
+    }
     //handles the turning on or off of the moniter
     public void TurnOffOnMoniter()
     {
@@ -40,10 +67,22 @@ public class CamSystemManager : MonoBehaviour
         if (openOrClose)
         {
             moniter.SetActive(true);
+            GameManager.Instance.usage++;
+            leftSideStuff.SetActive(false);
+            rightSideStuff.SetActive(false);
         }
         else
         {
             moniter.SetActive(false);
+            GameManager.Instance.usage--;
+            leftSideStuff.SetActive(true);
+            rightSideStuff.SetActive(true);
+        }
+        //sets the initial cam that the player would be looking at
+        if (!hasSentInitialCam)
+        {
+            ActivatedCam(CamType.MainStage);
+            hasSentInitialCam = true;
         }
     }
     //checks to see which cam is activated and prevent that cam from being able to be activated again
