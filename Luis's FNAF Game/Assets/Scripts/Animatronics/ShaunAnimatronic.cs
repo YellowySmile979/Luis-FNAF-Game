@@ -19,7 +19,7 @@ public class ShaunAnimatronic : BaseAnimatronic
         if(AnimatronicManager.Instance.shaun.transform.position == whereToStart.transform.position)
         {
             AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[1].transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[1];
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[1].transform.position)
         {
@@ -27,7 +27,7 @@ public class ShaunAnimatronic : BaseAnimatronic
             if(randomNumber > 40)
             {
                 AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[5].transform.position;
-                whereIAmNow.transform.position = listOfAllPlacesToMove[5].transform.position;
+                whereIAmNow = listOfAllPlacesToMove[5];
             }
             else
             {
@@ -35,34 +35,34 @@ public class ShaunAnimatronic : BaseAnimatronic
                 if(randomNo <= 30)
                 {
                     AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[3].transform.position;
-                    whereIAmNow.transform.position = listOfAllPlacesToMove[3].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[3];
                 }
                 else if(randomNo > 30 && randomNo <= 60)
                 {
                     AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[4].transform.position;
-                    whereIAmNow.transform.position = listOfAllPlacesToMove[4].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[4];
                 }
                 else if(randomNo > 60)
                 {
                     AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[9].transform.position;
-                    whereIAmNow.transform.position = listOfAllPlacesToMove[9].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[9];
                 }
             }
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[3].transform.position)
         {
             AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[1].transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[1];
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[4].transform.position)
         {
             AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[1].transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[1];
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[9].transform.position)
         {
             AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[1].transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[1];
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[5].transform.position)
         {
@@ -73,24 +73,24 @@ public class ShaunAnimatronic : BaseAnimatronic
                 if (randomNo <= 50)
                 {
                     AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[8].transform.position;
-                    whereIAmNow.transform.position = listOfAllPlacesToMove[8].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[8];
                 }
                 else
                 {
                     AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[1].transform.position;
-                    whereIAmNow.transform.position = listOfAllPlacesToMove[1].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[1];
                 }
             }
             else
             {
                 AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[10].transform.position;
-                whereIAmNow.transform.position = listOfAllPlacesToMove[10].transform.position;
+                whereIAmNow = listOfAllPlacesToMove[10];
             }
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[8].transform.position)
         {
             AnimatronicManager.Instance.shaun.transform.position = listOfAllPlacesToMove[5].transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[5].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[5];
         }
         else if(AnimatronicManager.Instance.shaun.transform.position == listOfAllPlacesToMove[10].transform.position)
         {
@@ -103,7 +103,7 @@ public class ShaunAnimatronic : BaseAnimatronic
         if (AnimatronicManager.Instance.isRightDoorClosed)
         {
             AnimatronicManager.Instance.shaun.transform.position = whereToStart.transform.position;
-            whereIAmNow.transform.position = listOfAllPlacesToMove[0].transform.position;
+            whereIAmNow = listOfAllPlacesToMove[0];
         }
         else
         {

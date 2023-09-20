@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         {
             power -= Time.deltaTime * usage;
             UIManager.Instance.BatteryPercentage(power);
+            UIManager.Instance.UsageBar(usage);
         }
         else
         {
@@ -115,5 +116,14 @@ public enum CamType
     EastHallway,
     WestHallway,
     Storage,
-    Entrance
+    Entrance,
+
+    MainHall1Vent,
+    MainHall2Vent,
+    PartyRoomVent,
+    PartsAndServiceVent,
+    KitchenVent,
+    EastHallwayVent,
+    WestHallwayVent,
+    StorageVent
 }

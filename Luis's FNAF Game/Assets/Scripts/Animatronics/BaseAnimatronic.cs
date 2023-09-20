@@ -44,6 +44,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
                 AnimatronicManager.Instance.enQi.transform.position = whereToStart.transform.position;
                 break;
         }
+        print("Start");
     }
 
     // Update is called once per frame
@@ -52,10 +53,12 @@ public abstract class BaseAnimatronic : MonoBehaviour
         //handes the checks for the appropriate animatronic
         if(animatronicType == AnimatronicType.Mia || animatronicType == AnimatronicType.Shaun)
         {
+            //print("Mia + Shaun");
             DoorChecksForMiaAndShaun();
         }
         else if(animatronicType == AnimatronicType.Jade)
         {
+            //print("Jade");
             VentLockChecksForJade();
         }
         else if(animatronicType == AnimatronicType.Elijah)
@@ -86,7 +89,10 @@ public abstract class BaseAnimatronic : MonoBehaviour
                 else
                 {
                     float randomNumber = Random.Range(1, 20);
-                    print("Jade: " + randomNumber);
+                    if (this.animatronicType == AnimatronicType.Jade)
+                    {
+                        print("Jade: " + randomNumber);
+                    }
                     if (randomNumber <= AILevel)
                     {
                         AnimatronicBehaviour();
@@ -112,7 +118,14 @@ public abstract class BaseAnimatronic : MonoBehaviour
                     else
                     {
                         float randomNumber = Random.Range(1, 20);
-                        print("Mia/Shaun: " + randomNumber);
+                        if(this.animatronicType == AnimatronicType.Mia)
+                        {
+                            print("Mia: " + randomNumber);
+                        }
+                        else if(this.animatronicType == AnimatronicType.Shaun)
+                        {
+                            print("Shaun: " + randomNumber);
+                        }
                         if (randomNumber <= AILevel)
                         {
                             AnimatronicBehaviour();

@@ -18,10 +18,11 @@ public class CamSystemManager : MonoBehaviour
 
     [Header("Cams")]
     public GameObject moniterBG;
-    public List<ScriptableCams> camBGs = new List<ScriptableCams>();
+    public List<ScriptableCams> camMainBgs = new List<ScriptableCams>();
+    public List<ScriptableCams> camVentBgs = new List<ScriptableCams>();
     public float maxRandomNumber = 10;
 
-    public List<Button> camButtons = new List<Button>();
+    public List<Button> camMainButtons = new List<Button>();
     public List<Button> ventCamButtons = new List<Button>();
 
     public static CamSystemManager Instance;
@@ -33,7 +34,8 @@ public class CamSystemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PartsAndServiceVent();
+        MainStageCamMain();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class CamSystemManager : MonoBehaviour
     {
         
     }
+    CamType typeOfCamMain, typeOfCamVent;
     //handles which cam to turn on
     public void VentCamOrMainCam()
     {
@@ -50,7 +53,7 @@ public class CamSystemManager : MonoBehaviour
             mainButton.interactable = false;
             ventButton.interactable = true;
             mainSys.SetActive(true);
-            ventSys.SetActive(false);
+            ventSys.SetActive(false);            
         }
         else
         {
@@ -91,319 +94,568 @@ public class CamSystemManager : MonoBehaviour
         switch (camtype)
         {
             case CamType.MainStage:
-                camButtons[0].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[0].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if(i == 0)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.MainHall1:
-                camButtons[1].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[1].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 1)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.MainHall2:
-                camButtons[2].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[2].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 2)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.PartsAndService:
-                camButtons[3].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[3].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 3)
                     {
                         continue;
                     }
                     
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.Kitchen:
-                camButtons[4].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[4].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 4)
                     {
                         continue;
                     }
                     print("FIre");
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.EastHallway:
-                camButtons[5].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[5].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 5)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.WestHallway:
-                camButtons[6].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[6].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 6)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.Storage:
-                camButtons[7].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[7].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 7)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.PartyRoom:
-                camButtons[8].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[8].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 8)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
                 }
                 break;
             case CamType.Entrance:
-                camButtons[9].interactable = false;
-                for (int i = 0; i < camButtons.Count; i++)
+                camMainButtons[9].interactable = false;
+                for (int i = 0; i < camMainButtons.Count; i++)
                 {
                     if (i == 9)
                     {
                         continue;
                     }
-                    camButtons[i].interactable = true;
+                    camMainButtons[i].interactable = true;
+                }
+                break;
+            case CamType.PartsAndServiceVent:
+                ventCamButtons[0].interactable = false;
+                for(int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if(i == 0)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.MainHall1Vent:
+                ventCamButtons[1].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 1)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.MainHall2Vent:
+                ventCamButtons[2].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 2)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.KitchenVent:
+                ventCamButtons[3].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 3)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.PartyRoomVent:
+                ventCamButtons[4].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 4)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.EastHallwayVent:
+                ventCamButtons[5].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 5)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.WestHallwayVent:
+                ventCamButtons[6].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 6)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
+                }
+                break;
+            case CamType.StorageVent:
+                ventCamButtons[7].interactable = false;
+                for (int i = 0; i < ventCamButtons.Count; i++)
+                {
+                    if (i == 7)
+                    {
+                        continue;
+                    }
+                    ventCamButtons[i].interactable = true;
                 }
                 break;
         }
     }
     //this entire section below this comment is to handle the cam and the buttons
-    public void MainStageCam()
+    public void MainStageCamMain()
     {
         float number;
-        if(camBGs.Find(s => s.camType == CamType.MainStage))
+        if(camMainBgs.Find(s => s.camType == CamType.MainStage))
         {
             //randomises which bg it is
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[0].bg2 != null)
+            if (camMainBgs[0].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[0].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[0].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[0].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[0].bg2;
                 }
             }
         }
         ActivatedCam(CamType.MainStage);
     }
-    public void MainHallCam1()
+    public void MainHallCam1Main()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.MainHall1))
+        if (camMainBgs.Find(s => s.camType == CamType.MainHall1))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[1].bg2 != null)
+            if (camMainBgs[1].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[1].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[1].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[1].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[1].bg2;
                 }
             }
         }
         ActivatedCam(CamType.MainHall1);
     }
-    public void MainHallCam2()
+    public void MainHallCam2Main()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.MainHall2))
+        if (camMainBgs.Find(s => s.camType == CamType.MainHall2))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[2].bg2 != null)
+            if (camMainBgs[2].bg2 != null)
             {
-                if ((number < maxRandomNumber / 2) && camBGs[2].bg2 != null)
+                if ((number < maxRandomNumber / 2) && camMainBgs[2].bg2 != null)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[2].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[2].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[2].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[2].bg2;
                 }
             }
         }
         ActivatedCam(CamType.MainHall2);
     }
-    public void PartsAndServiceCam()
+    public void PartsAndServiceCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.PartsAndService))
+        if (camMainBgs.Find(s => s.camType == CamType.PartsAndService))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[3].bg2 != null)
+            if (camMainBgs[3].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[3].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[3].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[3].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[3].bg2;
                 }
             }
         }
         ActivatedCam(CamType.PartsAndService);
     }
-    public void KitchenCam()
+    public void KitchenCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.Kitchen))
+        if (camMainBgs.Find(s => s.camType == CamType.Kitchen))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[4].bg2 != null)
+            if (camMainBgs[4].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[4].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[4].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[4].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[4].bg2;
                 }
             }
         }
         ActivatedCam(CamType.Kitchen);
     }
-    public void EastHallwayCam()
+    public void EastHallwayCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.EastHallway))
+        if (camMainBgs.Find(s => s.camType == CamType.EastHallway))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[5].bg2 != null)
+            if (camMainBgs[5].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[5].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[5].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[5].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[5].bg2;
                 }
             }
         }
         ActivatedCam(CamType.EastHallway);
     }
-    public void WestHallwayCam()
+    public void WestHallwayCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.WestHallway))
+        if (camMainBgs.Find(s => s.camType == CamType.WestHallway))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[6].bg2 != null)
+            if (camMainBgs[6].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[6].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[6].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg2;
                 }
             }           
         }
         ActivatedCam(CamType.WestHallway);
     }
-    public void StorageCam()
+    public void StorageCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.Storage))
+        if (camMainBgs.Find(s => s.camType == CamType.Storage))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[7].bg2 != null)
+            if (camMainBgs[7].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[7].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[7].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[7].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[7].bg2;
                 }
             }            
         }
         ActivatedCam(CamType.Storage);
     }
-    public void PartyRoomCam()
+    public void PartyRoomCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.PartyRoom))
+        if (camMainBgs.Find(s => s.camType == CamType.PartyRoom))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[8].bg2 != null)
+            if (camMainBgs[8].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[8].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[8].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[8].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[8].bg2;
                 }
             }            
         }
         ActivatedCam(CamType.PartyRoom);
     }
-    public void EntranceCam()
+    public void EntranceCamMain()
     {
         float number;
-        if (camBGs.Find(s => s.camType == CamType.Entrance))
+        if (camMainBgs.Find(s => s.camType == CamType.Entrance))
         {
             number = Random.Range(0, maxRandomNumber);
-            if (camBGs[9].bg2 != null)
+            if (camMainBgs[9].bg2 != null)
             {
                 if (number < maxRandomNumber / 2)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[9].bg1;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[9].bg1;
                 }
                 else
                 {
-                    moniterBG.GetComponent<Image>().sprite = camBGs[9].bg2;
+                    moniterBG.GetComponent<Image>().sprite = camMainBgs[9].bg2;
                 }
             }           
         }
         ActivatedCam(CamType.Entrance);
+    }
+    //vent section for buttons
+    public void PartsAndServiceVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.PartsAndServiceVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[0].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[0].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[0].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.PartsAndServiceVent);
+    }
+    public void MainHall1Vent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.MainHall1Vent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[1].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[1].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[1].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.MainHall1Vent);
+    }
+    public void MainHall2Vent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.MainHall2Vent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[2].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[2].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[2].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.MainHall2Vent);
+    }
+    public void KitchenVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.KitchenVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[3].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[3].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[3].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.KitchenVent);
+    }
+    public void PartyRoomVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.PartyRoomVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[4].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[4].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[4].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.PartyRoomVent);
+    }
+    public void EastHallwayVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.EastHallwayVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[5].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[5].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[5].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.EastHallwayVent);
+    }
+    public void WestHallwayVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.WestHallwayVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[6].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[6].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[6].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.WestHallwayVent);
+    }
+    public void StorageVent()
+    {
+        float number;
+        if (camVentBgs.Find(s => s.camType == CamType.StorageVent))
+        {
+            number = Random.Range(0, maxRandomNumber);
+            if (camVentBgs[7].bg2 != null)
+            {
+                if (number < maxRandomNumber / 2)
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[7].bg1;
+                }
+                else
+                {
+                    moniterBG.GetComponent<Image>().sprite = camVentBgs[7].bg2;
+                }
+            }
+        }
+        ActivatedCam(CamType.StorageVent);
     }
 }

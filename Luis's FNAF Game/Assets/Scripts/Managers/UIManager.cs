@@ -11,6 +11,10 @@ public class UIManager : MonoBehaviour
     [Header("Battery")]
     public Text batteryText;
 
+    [Header("Usage")]
+    public Image bar1;
+    public Image bar2, bar3, bar4;
+
     public static UIManager Instance;
 
     void Awake()
@@ -69,5 +73,36 @@ public class UIManager : MonoBehaviour
     {       
         batteryPercentage = battPercent / 10;
         batteryText.text = Mathf.Round(batteryPercentage) + "%";
+    }
+    //handles the usage bar and displaying the usage of power
+    public void UsageBar(float usageNumber)
+    {
+        switch (usageNumber)
+        {
+            case 1:
+                bar1.enabled = true;
+                bar2.enabled = false;
+                bar3.enabled = false;
+                bar4.enabled = false;
+                break;
+            case 2:
+                bar1.enabled = true;
+                bar2.enabled = true;
+                bar3.enabled = false;
+                bar4.enabled = false;
+                break;
+            case 3:
+                bar1.enabled = true;
+                bar2.enabled = true;
+                bar3.enabled = true;
+                bar4.enabled = false;
+                break;
+            case 4:
+                bar1.enabled = true;
+                bar2.enabled = true;
+                bar3.enabled = true;
+                bar4.enabled = true;
+                break;
+        }
     }
 }
