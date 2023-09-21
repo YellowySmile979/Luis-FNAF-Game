@@ -19,6 +19,7 @@ public class AnimatronicManager : MonoBehaviour
     public bool isLeftDoorClosed = false;
     public bool isRightDoorClosed = false;
     public GameObject leftDoor, rightDoor;
+    public GameObject cam2Lock, cam3Lock, cam4Lock, cam6Lock, cam7Lock;
 
     public static AnimatronicManager Instance;
 
@@ -35,7 +36,11 @@ public class AnimatronicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam2Lock.SetActive(false);
+        cam3Lock.SetActive(false);
+        cam4Lock.SetActive(false);
+        cam6Lock.SetActive(false);
+        cam7Lock.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,7 +79,7 @@ public class AnimatronicManager : MonoBehaviour
         {
             GameManager.Instance.usage--;
         }
-    }
+    }    
     //handles the updating of each animatronic's ai levels
     public void UpdateAILevels(float theTime)
     {
@@ -163,6 +168,197 @@ public class AnimatronicManager : MonoBehaviour
         if (jadeAILevel >= 20) jadeAILevel = 20;
         if (elijahAILevel >= 20) elijahAILevel = 20;
         if (enQiAILevel >= 20) enQiAILevel = 20;
+    }
+    //this is the vent lock section for the vent lock buttons
+    bool cam2LockOn;
+    public void Cam2Lock()
+    {
+        cam2LockOn = !cam2LockOn;
+        if (cam2LockOn)
+        {
+            cam2Lock.SetActive(true);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.green;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+
+            cam3LockOn = false;
+            cam4LockOn = false;
+            cam6LockOn = false;
+            cam7LockOn = false;
+        }
+        else
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+        }
+    }
+    bool cam3LockOn;
+    public void Cam3Lock()
+    {
+        cam3LockOn = !cam3LockOn;
+        if (cam3LockOn)
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(true);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.green;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+
+            cam2LockOn = false;
+            cam4LockOn = false;
+            cam6LockOn = false;
+            cam7LockOn = false;
+        }
+        else
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+        }
+    }
+    bool cam4LockOn;
+    public void Cam4Lock()
+    {
+        cam4LockOn = !cam4LockOn;
+        if (cam4LockOn)
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(true);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.green;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+
+            cam3LockOn = false;
+            cam2LockOn = false;
+            cam6LockOn = false;
+            cam7LockOn = false;
+        }
+        else
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+        }
+    }
+    bool cam6LockOn;
+    public void Cam6Lock()
+    {
+        cam6LockOn = !cam6LockOn;
+        if (cam6LockOn)
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(true);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.green;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+
+            cam3LockOn = false;
+            cam4LockOn = false;
+            cam2LockOn = false;
+            cam7LockOn = false;
+        }
+        else
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+        }
+    }
+    bool cam7LockOn;
+    public void Cam7Lock()
+    {
+        cam7LockOn = !cam7LockOn;
+        if (cam7LockOn)
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(true);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.green;
+
+            cam3LockOn = false;
+            cam4LockOn = false;
+            cam6LockOn = false;
+            cam2LockOn = false;
+        }
+        else
+        {
+            cam2Lock.SetActive(false);
+            cam3Lock.SetActive(false);
+            cam4Lock.SetActive(false);
+            cam6Lock.SetActive(false);
+            cam7Lock.SetActive(false);
+
+            UIManager.Instance.cam2LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam3LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam4LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam6LockUi.color = UIManager.Instance.red;
+            UIManager.Instance.cam7LockUi.color = UIManager.Instance.red;
+        }
     }
 }
 public enum AnimatronicType

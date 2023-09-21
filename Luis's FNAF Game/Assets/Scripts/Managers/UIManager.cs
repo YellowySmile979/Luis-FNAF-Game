@@ -15,6 +15,12 @@ public class UIManager : MonoBehaviour
     public Image bar1;
     public Image bar2, bar3, bar4;
 
+    [Header("Vent Locks")]
+    public Image cam2LockUi; 
+    public Image cam3LockUi, cam4LockUi, cam6LockUi, cam7LockUi;
+    public Button cam2LockButton, cam3LockButton, cam4LockButton, cam6LockButton, cam7LockButton;
+    public Color green, red;
+
     public static UIManager Instance;
 
     void Awake()
@@ -25,7 +31,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam2LockUi.color = red;
+        cam3LockUi.color = red;
+        cam4LockUi.color = red;
+        cam6LockUi.color = red;
+        cam7LockUi.color = red;
     }
 
     // Update is called once per frame
@@ -103,6 +113,59 @@ public class UIManager : MonoBehaviour
                 bar3.enabled = true;
                 bar4.enabled = true;
                 break;
+        }
+    }
+    //handles which button is in effect
+    //cam2Lock: 0, cam3Lock: 1, cam4Lock: 2, cam6Lock: 3, cam7Lock: 4, cam without a lock: 5
+    public void ChosenVentLock(float chosenVentLockNo)
+    {
+        if (chosenVentLockNo == 0)
+        {
+            cam2LockButton.gameObject.SetActive(true);
+            cam3LockButton.gameObject.SetActive(false);
+            cam4LockButton.gameObject.SetActive(false);
+            cam6LockButton.gameObject.SetActive(false);
+            cam7LockButton.gameObject.SetActive(false);
+        }
+        else if (chosenVentLockNo == 1)
+        {
+            cam2LockButton.gameObject.SetActive(false);
+            cam3LockButton.gameObject.SetActive(true);
+            cam4LockButton.gameObject.SetActive(false);
+            cam6LockButton.gameObject.SetActive(false);
+            cam7LockButton.gameObject.SetActive(false);
+        }
+        else if (chosenVentLockNo == 2)
+        {
+            cam2LockButton.gameObject.SetActive(false);
+            cam3LockButton.gameObject.SetActive(false);
+            cam4LockButton.gameObject.SetActive(true);
+            cam6LockButton.gameObject.SetActive(false);
+            cam7LockButton.gameObject.SetActive(false);
+        }
+        else if (chosenVentLockNo == 3)
+        {
+            cam2LockButton.gameObject.SetActive(false);
+            cam3LockButton.gameObject.SetActive(false);
+            cam4LockButton.gameObject.SetActive(false);
+            cam6LockButton.gameObject.SetActive(true);
+            cam7LockButton.gameObject.SetActive(false);
+        }
+        else if (chosenVentLockNo == 4)
+        {
+            cam2LockButton.gameObject.SetActive(false);
+            cam3LockButton.gameObject.SetActive(false);
+            cam4LockButton.gameObject.SetActive(false);
+            cam6LockButton.gameObject.SetActive(false);
+            cam7LockButton.gameObject.SetActive(true);
+        }
+        else if (chosenVentLockNo == 5)
+        {
+            cam2LockButton.gameObject.SetActive(false);
+            cam3LockButton.gameObject.SetActive(false);
+            cam4LockButton.gameObject.SetActive(false);
+            cam6LockButton.gameObject.SetActive(false);
+            cam7LockButton.gameObject.SetActive(false);
         }
     }
 }

@@ -43,9 +43,17 @@ public class JadeAnimatronic : BaseAnimatronic
             float randomNumber = Random.Range(1, 100);
             if (randomNumber > 40)
             {
-                //from Main Hall 1 vent to West Hallway vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[7].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[7];
+                //performs the check of the vent locks
+                if (AnimatronicManager.Instance.cam2Lock.activeSelf == false)
+                {
+                    //from Main Hall 1 vent to West Hallway vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[7].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[7];
+                }
+                else
+                {
+                    print("Cam 2 vent lock stopped Jade");
+                }
             }
             else
             {
@@ -72,9 +80,17 @@ public class JadeAnimatronic : BaseAnimatronic
                 float randomNo = Random.Range(1, 100);
                 if (randomNo <= 50)
                 {
-                    //from Main Hall 2 vent to Kitchen vent
-                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[4].transform.position;
-                    whereIAmNow = listOfAllPlacesToMove[4];
+                    //cam 4 vent lock check
+                    if (AnimatronicManager.Instance.cam4Lock.activeSelf == false)
+                    {
+                        //from Main Hall 2 vent to Kitchen vent
+                        AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[4].transform.position;
+                        whereIAmNow = listOfAllPlacesToMove[4];
+                    }
+                    else
+                    {
+                        print("Cam 4 vent lock stopped Jade (from Cam 3)");
+                    }
                 }
                 else
                 {
@@ -85,9 +101,17 @@ public class JadeAnimatronic : BaseAnimatronic
             }
             else
             {
-                //from Main Hall 2 vent to Party Room vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[5].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[5];
+                //cam 3 vent lock check
+                if (AnimatronicManager.Instance.cam3Lock.activeSelf == false)
+                {
+                    //from Main Hall 2 vent to Party Room vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[5].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[5];
+                }
+                else
+                {
+                    print("Cam 3 vent lock stopped Jade");
+                }
             }
         }
         else if(AnimatronicManager.Instance.jade.transform.position == listOfAllPlacesToMove[4].transform.position)
@@ -95,9 +119,17 @@ public class JadeAnimatronic : BaseAnimatronic
             float randomNumber = Random.Range(1, 100);
             if (randomNumber <= 50)
             {
-                //from Kitchen vent to Main Hall 2
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[3].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[3];
+                //cam 4 vent lock
+                if (AnimatronicManager.Instance.cam4Lock.activeSelf == false)
+                {
+                    //from Kitchen vent to Main Hall 2
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[3].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[3];
+                }
+                else
+                {
+                    print("Cam 4 vent lock stopped Jade (from Cam 4)");
+                }
             }
             else
             {
@@ -112,8 +144,8 @@ public class JadeAnimatronic : BaseAnimatronic
             if(randomNumber <= 40)
             {
                 //from Party Room vent to Main Hall 1 vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[2].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[2];
+                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[3].transform.position;
+                whereIAmNow = listOfAllPlacesToMove[3];
             }
             else
             {
@@ -153,9 +185,17 @@ public class JadeAnimatronic : BaseAnimatronic
             }
             else
             {
-                //from East Hallway vent to Office vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[9].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[9];
+                //cam 6 vent lock
+                if (AnimatronicManager.Instance.cam6Lock.activeSelf == false)
+                {
+                    //from East Hallway vent to Office vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[9].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[9];
+                }
+                else
+                {
+                    print("Cam 6 vent lock stopped Jade");
+                }
             }
         }
         else if(AnimatronicManager.Instance.jade.transform.position == listOfAllPlacesToMove[7].transform.position)
@@ -174,30 +214,44 @@ public class JadeAnimatronic : BaseAnimatronic
                 {
                     //from West Hallway vent to Party Room vent
                     AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[5].transform.position;
-                    whereIAmNow = listOfAllPlacesToMove[5];
+                    whereIAmNow = listOfAllPlacesToMove[2];
                 }
             }
             else
             {
-                //from West Hallway vent to Office vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[9].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[9];
+                //cam 7 vent lock
+                if (AnimatronicManager.Instance.cam7Lock.activeSelf == false)
+                {
+                    //from West Hallway vent to Office vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[9].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[9];
+                }
+                else
+                {
+                    print("Cam 7 vent lock stopped Jade");
+                }
             }
         }
         else if(AnimatronicManager.Instance.jade.transform.position == listOfAllPlacesToMove[8].transform.position)
         {
             float randomNumber = Random.Range(1, 100);
-            if(randomNumber <= 50)
+            if(randomNumber <= 30)
             {
                 //from Storage vent to East Hallway
                 AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[6].transform.position;
                 whereIAmNow = listOfAllPlacesToMove[6];
             }
-            else
+            else if (randomNumber > 30 && randomNumber <= 60)
             {
                 //from Storage vent to West Hallway
                 AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[7].transform.position;
                 whereIAmNow = listOfAllPlacesToMove[7];
+            }
+            else if (randomNumber > 60)
+            {
+                //from Storage vent to Party Room vent
+                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[5].transform.position;
+                whereIAmNow = listOfAllPlacesToMove[5];
             }
         }
         else if(AnimatronicManager.Instance.jade.transform.position == listOfAllPlacesToMove[9].transform.position)

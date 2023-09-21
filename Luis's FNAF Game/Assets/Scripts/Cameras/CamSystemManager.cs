@@ -207,6 +207,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.PartsAndServiceVent:
                 ventCamButtons[0].interactable = false;
+                UIManager.Instance.ChosenVentLock(5);
                 for(int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if(i == 0)
@@ -218,6 +219,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.MainHall1Vent:
                 ventCamButtons[1].interactable = false;
+                UIManager.Instance.ChosenVentLock(0);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 1)
@@ -229,6 +231,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.MainHall2Vent:
                 ventCamButtons[2].interactable = false;
+                UIManager.Instance.ChosenVentLock(1);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 2)
@@ -240,6 +243,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.KitchenVent:
                 ventCamButtons[3].interactable = false;
+                UIManager.Instance.ChosenVentLock(2);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 3)
@@ -251,6 +255,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.PartyRoomVent:
                 ventCamButtons[4].interactable = false;
+                UIManager.Instance.ChosenVentLock(5);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 4)
@@ -262,6 +267,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.EastHallwayVent:
                 ventCamButtons[5].interactable = false;
+                UIManager.Instance.ChosenVentLock(3);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 5)
@@ -273,6 +279,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.WestHallwayVent:
                 ventCamButtons[6].interactable = false;
+                UIManager.Instance.ChosenVentLock(4);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 6)
@@ -284,6 +291,7 @@ public class CamSystemManager : MonoBehaviour
                 break;
             case CamType.StorageVent:
                 ventCamButtons[7].interactable = false;
+                UIManager.Instance.ChosenVentLock(5);
                 for (int i = 0; i < ventCamButtons.Count; i++)
                 {
                     if (i == 7)
