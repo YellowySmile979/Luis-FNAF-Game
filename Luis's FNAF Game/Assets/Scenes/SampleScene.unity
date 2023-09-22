@@ -229,6 +229,7 @@ MonoBehaviour:
   - {fileID: 229981683}
   - {fileID: 166087102}
   - {fileID: 1734717269}
+  counter: 0
 --- !u!1 &17538934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,8 +3118,8 @@ MonoBehaviour:
   enQi: {fileID: 0}
   miaAILevel: 0
   shaunAILevel: 0
-  jadeAILevel: 6
-  elijahAILevel: 0
+  jadeAILevel: 0
+  elijahAILevel: 6
   enQiAILevel: 0
   isLeftDoorClosed: 0
   isRightDoorClosed: 0
@@ -5109,6 +5110,7 @@ MonoBehaviour:
   - {fileID: 229981683}
   - {fileID: 166087102}
   - {fileID: 1734717269}
+  counter: 0
 --- !u!1 &835237258
 GameObject:
   m_ObjectHideFlags: 0
@@ -5572,6 +5574,7 @@ MonoBehaviour:
   - {fileID: 229981683}
   - {fileID: 166087102}
   - {fileID: 1734717269}
+  counter: 0
 --- !u!1 &921996528
 GameObject:
   m_ObjectHideFlags: 0
@@ -10265,6 +10268,7 @@ MonoBehaviour:
   - {fileID: 1650746757}
   - {fileID: 424093792}
   - {fileID: 1554172536}
+  counter: 0
 --- !u!1 &1667346541
 GameObject:
   m_ObjectHideFlags: 0
@@ -10429,6 +10433,9 @@ MonoBehaviour:
   - {fileID: 1227687024}
   - {fileID: 1238084743}
   - {fileID: 422555299}
+  mainHall2BG: {fileID: 0}
+  isRunningDownWestHallway: 0
+  westHallwayRunning: {fileID: 0}
 --- !u!4 &1721011632
 Transform:
   m_ObjectHideFlags: 0
@@ -11824,6 +11831,17 @@ MonoBehaviour:
   - {fileID: 229981683}
   - {fileID: 166087102}
   - {fileID: 1734717269}
+  counter: 0
+  phaseImages:
+  - {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  westHallwayRunning: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  setTimeTillDeath: 5
+  timeTillDeath: 0
 --- !u!1 &2001345227
 GameObject:
   m_ObjectHideFlags: 0

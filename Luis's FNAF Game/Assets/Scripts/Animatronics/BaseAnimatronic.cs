@@ -63,17 +63,74 @@ public abstract class BaseAnimatronic : MonoBehaviour
         }
         else if(animatronicType == AnimatronicType.Elijah)
         {
-
+            MovementOpportunitiesForElijah();
         }
         else if (animatronicType == AnimatronicType.EnQi)
         {
-
+            SongCheckForEnQi();
         }
     }
 
     public virtual void AnimatronicBehaviour()
     {
 
+    }
+    //handles checks for EnQi
+    void SongCheckForEnQi()
+    {
+        if (AnimatronicManager.Instance.allAnimsCanAttack)
+        {
+            if(AILevel > 0)
+            {
+                if(timeToMove > 0)
+                {
+                    timeToMove -= Time.deltaTime;
+                }
+                else
+                {
+                    float randomNumber = Random.Range(1, 20);
+                    if(this.animatronicType == AnimatronicType.EnQi)
+                    {
+                        print("EnQi: " + randomNumber);
+                    }
+                    if(randomNumber <= AILevel)
+                    {
+                        AnimatronicBehaviour();
+                    }
+                    timeToMove = setTimeToMove;
+                }
+            }
+        }
+    }
+    public float counter = 0;
+    //handles checks for Elijah's MOVEMENT
+    void MovementOpportunitiesForElijah()
+    {
+        if (AnimatronicManager.Instance.allAnimsCanAttack)
+        {
+            if (AILevel > 0)
+            {
+                if (timeToMove > 0)
+                {
+                    timeToMove -= Time.deltaTime;
+                }
+                else
+                {
+                    float randomNumber = Random.Range(1, 20);
+                    if(this.animatronicType == AnimatronicType.Elijah)
+                    {
+                        print("Elijah: " + randomNumber);
+                    }
+                    if (randomNumber <= AILevel && !CamSystemManager.Instance.openOrClose)
+                    {
+                        print("counter has increased");
+                        if(counter <= 5) counter++;
+                        AnimatronicBehaviour();
+                    }
+                    timeToMove = setTimeToMove;
+                }
+            }
+        }
     }
     //handles checks for jade's movements and whatever
     void VentLockChecksForJade()

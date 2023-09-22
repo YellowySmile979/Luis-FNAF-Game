@@ -345,23 +345,12 @@ public class CamSystemManager : MonoBehaviour
         }
         ActivatedCam(CamType.MainHall1);
     }
+    [HideInInspector] public Sprite mainHall2BG;
     public void MainHallCam2Main()
-    {
-        float number;
+    {        
         if (camMainBgs.Find(s => s.camType == CamType.MainHall2))
         {
-            number = Random.Range(0, maxRandomNumber);
-            if (camMainBgs[2].bg2 != null)
-            {
-                if ((number < maxRandomNumber / 2) && camMainBgs[2].bg2 != null)
-                {
-                    moniterBG.GetComponent<Image>().sprite = camMainBgs[2].bg1;
-                }
-                else
-                {
-                    moniterBG.GetComponent<Image>().sprite = camMainBgs[2].bg2;
-                }
-            }
+            moniterBG.GetComponent<Image>().sprite = mainHall2BG;
         }
         ActivatedCam(CamType.MainHall2);
     }
@@ -425,23 +414,37 @@ public class CamSystemManager : MonoBehaviour
         }
         ActivatedCam(CamType.EastHallway);
     }
+    [HideInInspector] public bool isRunningDownWestHallway;
+    [HideInInspector] public Sprite westHallwayRunning;
     public void WestHallwayCamMain()
     {
         float number;
-        if (camMainBgs.Find(s => s.camType == CamType.WestHallway))
+        if (!isRunningDownWestHallway)
         {
-            number = Random.Range(0, maxRandomNumber);
-            if (camMainBgs[6].bg2 != null)
+            if (camMainBgs.Find(s => s.camType == CamType.WestHallway))
             {
-                if (number < maxRandomNumber / 2)
+                number = Random.Range(0, maxRandomNumber);
+                if (camMainBgs[6].bg2 != null)
                 {
-                    moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg1;
+                    if (number < maxRandomNumber / 2)
+                    {
+                        moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg1;
+                    }
+                    else
+                    {
+                        moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg2;
+                    }
                 }
-                else
-                {
-                    moniterBG.GetComponent<Image>().sprite = camMainBgs[6].bg2;
-                }
-            }           
+            }
+        }
+        else
+        {
+            if(FindObjectOfType<BaseAnimatronic>().counter == 5)
+            {
+                FindObjectOfType<BaseAnimatronic>().counter = 6;
+            }
+
+            moniterBG.GetComponent<Image>().sprite = westHallwayRunning;
         }
         ActivatedCam(CamType.WestHallway);
     }

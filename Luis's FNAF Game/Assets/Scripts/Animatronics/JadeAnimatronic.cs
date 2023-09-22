@@ -53,6 +53,7 @@ public class JadeAnimatronic : BaseAnimatronic
                 else
                 {
                     print("Cam 2 vent lock stopped Jade");
+                    //play audio for being stopped
                 }
             }
             else
@@ -90,6 +91,7 @@ public class JadeAnimatronic : BaseAnimatronic
                     else
                     {
                         print("Cam 4 vent lock stopped Jade (from Cam 3)");
+                        //play audio for being stopped
                     }
                 }
                 else
@@ -111,6 +113,7 @@ public class JadeAnimatronic : BaseAnimatronic
                 else
                 {
                     print("Cam 3 vent lock stopped Jade");
+                    //play audio for being stopped
                 }
             }
         }
@@ -129,6 +132,7 @@ public class JadeAnimatronic : BaseAnimatronic
                 else
                 {
                     print("Cam 4 vent lock stopped Jade (from Cam 4)");
+                    //play audio for being stopped
                 }
             }
             else
@@ -195,6 +199,7 @@ public class JadeAnimatronic : BaseAnimatronic
                 else
                 {
                     print("Cam 6 vent lock stopped Jade");
+                    //play audio for being stopped
                 }
             }
         }
@@ -229,6 +234,7 @@ public class JadeAnimatronic : BaseAnimatronic
                 else
                 {
                     print("Cam 7 vent lock stopped Jade");
+                    //play audio for being stopped
                 }
             }
         }
