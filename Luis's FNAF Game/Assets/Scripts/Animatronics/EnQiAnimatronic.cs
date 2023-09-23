@@ -8,6 +8,7 @@ public class EnQiAnimatronic : BaseAnimatronic
     public List<AudioClip> listOfAllSongs = new List<AudioClip>();
     public AudioClip triggerSong;
     public float setTimeTillDeath = 7f, timeTillDeath;
+    public AudioClip current, audioClip;
 
     public override void AnimatronicBehaviour()
     {
@@ -16,13 +17,16 @@ public class EnQiAnimatronic : BaseAnimatronic
     //handles en qi's movement
     //there should be one specific song in the list that causes en qi to attack
     float counterr = 0;
-    void EnQiMovement()
+    public void EnQiMovement(bool skip = false)
     {
         AudioManager.Instance.audioSource.Stop();
-        float randomNumber = Random.Range(0, listOfAllSongs.Count);
-        AudioClip audioClip;
-        audioClip = listOfAllSongs[(int)randomNumber];
-        AudioManager.Instance.audioSource.PlayOneShot(audioClip);
+        if (!skip)
+        {
+            float randomNumber = Random.Range(0, listOfAllSongs.Count);
+            audioClip = listOfAllSongs[(int)randomNumber];
+        }
+        AudioManager.Instance.audioSource.clip = audioClip;
+        AudioManager.Instance.audioSource.Play();
 
         //ensures that if the trigger song hasnt been played, it will play
         if(counterr > 3)
@@ -30,7 +34,7 @@ public class EnQiAnimatronic : BaseAnimatronic
             audioClip = triggerSong;
         }
 
-        UIManager.Instance.SongPlayer(AudioManager.Instance.audioSource.time, audioClip.length, audioClip.name);
+        current = audioClip;
         print("Song playing: " + audioClip);
         //checks to see if the song that is playing is the trigger song
         if(audioClip == triggerSong)
@@ -44,8 +48,17 @@ public class EnQiAnimatronic : BaseAnimatronic
             print("Hello");
         }        
     }
+    public void UpdateLocalVariable(AudioClip clip)
+    {
+        audioClip = clip;
+    }
     void FixedUpdate()
     {
+        if(current != null)
+        {
+            UIManager.Instance.SongPlayer(AudioManager.Instance.audioSource.time, current.length, current.name);
+        }
+
         if (isTriggerSong)
         {
             if (timeTillDeath > 0)

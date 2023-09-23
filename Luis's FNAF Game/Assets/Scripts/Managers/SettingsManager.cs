@@ -26,7 +26,8 @@ public class SettingsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        musicSlider.value = PlayerPrefs.GetFloat(AudioManager.musicKey, 1f);
+        sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.sfxKey, 1f);
     }
 
     // Update is called once per frame

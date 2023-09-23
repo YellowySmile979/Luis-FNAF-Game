@@ -58,6 +58,48 @@ public class CamSystemManager : MonoBehaviour
     {
         songPlayer.SetActive(true);
     }
+    //skips the song forward by 1
+    public void SkipForward()
+    {
+        EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+        AudioClip clip = AudioManager.Instance.audioSource.clip;
+        int index = enQiAnimatronic.listOfAllSongs.FindIndex(0, enQiAnimatronic.listOfAllSongs.Count, s => s == clip);
+        
+        index++;
+        print("Forward Index: " + index);
+
+        if (index < 0)
+        {
+            index = enQiAnimatronic.listOfAllSongs.Count;
+        }
+        else if(index > enQiAnimatronic.listOfAllSongs.Count)
+        {
+            index = 0;
+        }
+        enQiAnimatronic.audioClip = enQiAnimatronic.listOfAllSongs[index];
+        enQiAnimatronic.EnQiMovement(true);
+    }
+    //skips the song backward by 1
+    public void SkipBackward()
+    {
+        EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+        AudioClip clip = AudioManager.Instance.audioSource.clip;
+        int index = enQiAnimatronic.listOfAllSongs.FindIndex(0, enQiAnimatronic.listOfAllSongs.Count, s => s == clip);
+        
+        index--;
+        print("Backward Index: " + index);
+
+        if (index < 0)
+        {
+            index = enQiAnimatronic.listOfAllSongs.Count;
+        }
+        else if (index > enQiAnimatronic.listOfAllSongs.Count)
+        {
+            index = 0;
+        }
+        enQiAnimatronic.audioClip = enQiAnimatronic.listOfAllSongs[index];
+        enQiAnimatronic.EnQiMovement(true);
+    }
     CamType typeOfCamMain, typeOfCamVent;
     //handles which cam to turn on
     public void VentCamOrMainCam()
