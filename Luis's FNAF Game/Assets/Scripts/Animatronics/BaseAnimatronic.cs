@@ -10,8 +10,9 @@ public abstract class BaseAnimatronic : MonoBehaviour
 
     [Header("AI")]
     public float AILevel;
-    public static float setTimeToMove = 5f;
+    public float setTimeToMove = 5f;
     [SerializeField] protected float timeToMove;
+    protected bool isTriggerSong;
 
     [Header("Places to Move")]
     public GameObject whereToStart;

@@ -15,17 +15,40 @@ public class EnQiAnimatronic : BaseAnimatronic
     }
     //handles en qi's movement
     //there should be one specific song in the list that causes en qi to attack
+    float counterr = 0;
     void EnQiMovement()
     {
+        AudioManager.Instance.audioSource.Stop();
         float randomNumber = Random.Range(0, listOfAllSongs.Count);
         AudioClip audioClip;
         audioClip = listOfAllSongs[(int)randomNumber];
-        AnimatronicManager.Instance.audioSource.PlayOneShot(audioClip);
+        AudioManager.Instance.audioSource.PlayOneShot(audioClip);
 
+        //ensures that if the trigger song hasnt been played, it will play
+        if(counterr > 3)
+        {
+            audioClip = triggerSong;
+        }
+
+        UIManager.Instance.SongPlayer(AudioManager.Instance.audioSource.time, audioClip.length, audioClip.name);
+        print("Song playing: " + audioClip);
         //checks to see if the song that is playing is the trigger song
         if(audioClip == triggerSong)
         {
-            if(timeTillDeath > 0)
+            isTriggerSong = true;
+            print("hELLO");
+        }
+        else
+        {
+            isTriggerSong = false;
+            print("Hello");
+        }        
+    }
+    void FixedUpdate()
+    {
+        if (isTriggerSong)
+        {
+            if (timeTillDeath > 0)
             {
                 timeTillDeath -= Time.deltaTime;
             }

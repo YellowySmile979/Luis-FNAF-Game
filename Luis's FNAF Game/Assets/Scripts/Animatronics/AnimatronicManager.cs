@@ -20,13 +20,19 @@ public class AnimatronicManager : MonoBehaviour
     public bool isRightDoorClosed = false;
     public GameObject leftDoor, rightDoor;
     public GameObject cam2Lock, cam3Lock, cam4Lock, cam6Lock, cam7Lock;
-    public AudioSource audioSource;
 
     public static AnimatronicManager Instance;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         //sets the animatronics if they havent already
         if (mia == null) mia = FindObjectOfType<MiaAnimatronic>(true).gameObject;
         if (shaun == null) shaun = FindObjectOfType<ShaunAnimatronic>(true).gameObject;
@@ -42,8 +48,6 @@ public class AnimatronicManager : MonoBehaviour
         cam4Lock.SetActive(false);
         cam6Lock.SetActive(false);
         cam7Lock.SetActive(false);
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -16,6 +16,8 @@ public class CamSystemManager : MonoBehaviour
 
     public GameObject leftSideStuff, rightSideStuff;
 
+    public GameObject songPlayer;
+
     [Header("Cams")]
     public GameObject moniterBG;
     public List<ScriptableCams> camMainBgs = new List<ScriptableCams>();
@@ -29,19 +31,32 @@ public class CamSystemManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         PartsAndServiceVent();
         MainStageCamMain();
+        songPlayer.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    //shows the song player
+    public void ShowSongPlayer()
+    {
+        songPlayer.SetActive(true);
     }
     CamType typeOfCamMain, typeOfCamVent;
     //handles which cam to turn on
@@ -103,6 +118,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.MainHall1:
                 camMainButtons[1].interactable = false;
@@ -114,6 +130,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.MainHall2:
                 camMainButtons[2].interactable = false;
@@ -125,6 +142,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.PartsAndService:
                 camMainButtons[3].interactable = false;
@@ -137,6 +155,7 @@ public class CamSystemManager : MonoBehaviour
                     
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.Kitchen:
                 camMainButtons[4].interactable = false;
@@ -149,6 +168,7 @@ public class CamSystemManager : MonoBehaviour
                     print("FIre");
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.EastHallway:
                 camMainButtons[5].interactable = false;
@@ -160,6 +180,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.WestHallway:
                 camMainButtons[6].interactable = false;
@@ -171,6 +192,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.Storage:
                 camMainButtons[7].interactable = false;
@@ -182,6 +204,8 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                //shows the song player
+                ShowSongPlayer();
                 break;
             case CamType.PartyRoom:
                 camMainButtons[8].interactable = false;
@@ -193,6 +217,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.Entrance:
                 camMainButtons[9].interactable = false;
@@ -204,6 +229,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     camMainButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.PartsAndServiceVent:
                 ventCamButtons[0].interactable = false;
@@ -216,6 +242,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.MainHall1Vent:
                 ventCamButtons[1].interactable = false;
@@ -228,6 +255,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.MainHall2Vent:
                 ventCamButtons[2].interactable = false;
@@ -240,6 +268,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.KitchenVent:
                 ventCamButtons[3].interactable = false;
@@ -252,6 +281,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.PartyRoomVent:
                 ventCamButtons[4].interactable = false;
@@ -264,6 +294,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.EastHallwayVent:
                 ventCamButtons[5].interactable = false;
@@ -276,6 +307,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.WestHallwayVent:
                 ventCamButtons[6].interactable = false;
@@ -288,6 +320,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
             case CamType.StorageVent:
                 ventCamButtons[7].interactable = false;
@@ -300,6 +333,7 @@ public class CamSystemManager : MonoBehaviour
                     }
                     ventCamButtons[i].interactable = true;
                 }
+                songPlayer.SetActive(false);
                 break;
         }
     }

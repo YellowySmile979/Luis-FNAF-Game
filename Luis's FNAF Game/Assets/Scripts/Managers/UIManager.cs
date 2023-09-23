@@ -24,13 +24,19 @@ public class UIManager : MonoBehaviour
     [Header("Songs")]
     public Image songProgress;
     public Text songPlayingName;
-    public Button skipToNext, skipToPrevious;
 
     public static UIManager Instance;
 
     void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     // Start is called before the first frame update
@@ -174,8 +180,9 @@ public class UIManager : MonoBehaviour
         }
     }
     //handles the song player
-    public void SongPlayer()
+    public void SongPlayer(float progressOfSong, float totalDuration, string nameOfSong)
     {
-
+        songProgress.fillAmount = progressOfSong / totalDuration;
+        songPlayingName.text = nameOfSong;
     }
 }

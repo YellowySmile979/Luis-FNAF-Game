@@ -58,16 +58,19 @@ public class GameManager : MonoBehaviour
         else if(GameState == GameState.Dying)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            AudioManager.Instance.audioSource.Stop();
             //play dying sequence depending on which animatronic jumpscares Luis
         }
         else if(GameState == GameState.Lose)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            AudioManager.Instance.audioSource.Stop();
             //happens if jump scare
         }
         else if(GameState == GameState.PowerOutage)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            AudioManager.Instance.audioSource.Stop();
             //play the lights out part
         }
     }
