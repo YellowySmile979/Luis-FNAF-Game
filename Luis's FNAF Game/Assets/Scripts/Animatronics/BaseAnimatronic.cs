@@ -95,7 +95,16 @@ public abstract class BaseAnimatronic : MonoBehaviour
                     }
                     if(randomNumber <= AILevel)
                     {
-                        AnimatronicBehaviour();
+                        float randomNo = Random.Range(1, 100);
+                        if(randomNo <= 50)
+                        {
+                            AnimatronicBehaviour();
+                        }
+                        else
+                        {
+                            //do nothing
+                            print("Song does not change");
+                        }
                     }
                     timeToMove = setTimeToMove;
                 }

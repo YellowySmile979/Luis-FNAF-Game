@@ -20,6 +20,7 @@ public class AnimatronicManager : MonoBehaviour
     public bool isRightDoorClosed = false;
     public GameObject leftDoor, rightDoor;
     public GameObject cam2Lock, cam3Lock, cam4Lock, cam6Lock, cam7Lock;
+    public AudioSource audioSource;
 
     public static AnimatronicManager Instance;
 
@@ -41,6 +42,8 @@ public class AnimatronicManager : MonoBehaviour
         cam4Lock.SetActive(false);
         cam6Lock.SetActive(false);
         cam7Lock.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

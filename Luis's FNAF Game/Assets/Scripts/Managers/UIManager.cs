@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
     public Button cam2LockButton, cam3LockButton, cam4LockButton, cam6LockButton, cam7LockButton;
     public Color green, red;
 
+    [Header("Songs")]
+    public Image songProgress;
+    public Text songPlayingName;
+    public Button skipToNext, skipToPrevious;
+
     public static UIManager Instance;
 
     void Awake()
@@ -167,5 +172,10 @@ public class UIManager : MonoBehaviour
             cam6LockButton.gameObject.SetActive(false);
             cam7LockButton.gameObject.SetActive(false);
         }
+    }
+    //handles the song player
+    public void SongPlayer()
+    {
+
     }
 }
