@@ -45,6 +45,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
                 AnimatronicManager.Instance.enQi.transform.position = whereToStart.transform.position;
                 break;
         }
+        OtherStart();
         print("Start");
     }
 
@@ -73,6 +74,10 @@ public abstract class BaseAnimatronic : MonoBehaviour
     }
 
     public virtual void AnimatronicBehaviour()
+    {
+
+    }
+    protected virtual void OtherStart()
     {
 
     }

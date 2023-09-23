@@ -62,20 +62,24 @@ public class CamSystemManager : MonoBehaviour
     public void SkipForward()
     {
         EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+        //sets the current playing clip in the audiosource to the clip var
         AudioClip clip = AudioManager.Instance.audioSource.clip;
+        //gets the index of that clip and sets it to the index int
         int index = enQiAnimatronic.listOfAllSongs.FindIndex(0, enQiAnimatronic.listOfAllSongs.Count, s => s == clip);
         
         index++;
         print("Forward Index: " + index);
-
+        
+        //checks to see if index goes out of bounds
         if (index < 0)
         {
-            index = enQiAnimatronic.listOfAllSongs.Count;
+            index = enQiAnimatronic.listOfAllSongs.Count - 1;
         }
         else if(index > enQiAnimatronic.listOfAllSongs.Count)
         {
             index = 0;
         }
+        //plays clip
         enQiAnimatronic.audioClip = enQiAnimatronic.listOfAllSongs[index];
         enQiAnimatronic.EnQiMovement(true);
     }
@@ -91,7 +95,7 @@ public class CamSystemManager : MonoBehaviour
 
         if (index < 0)
         {
-            index = enQiAnimatronic.listOfAllSongs.Count;
+            index = enQiAnimatronic.listOfAllSongs.Count - 1;
         }
         else if (index > enQiAnimatronic.listOfAllSongs.Count)
         {
@@ -99,6 +103,22 @@ public class CamSystemManager : MonoBehaviour
         }
         enQiAnimatronic.audioClip = enQiAnimatronic.listOfAllSongs[index];
         enQiAnimatronic.EnQiMovement(true);
+    }
+    bool isPaused = true;
+    //pauses the song
+    public void PauseSong()
+    {
+        isPaused = !isPaused;
+        if(!isPaused)
+        {
+            AudioManager.Instance.audioSource.Pause();
+        }
+        else
+        {
+            AudioManager.Instance.audioSource.UnPause();
+            EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+            enQiAnimatronic.idleTime = enQiAnimatronic.setIdleTime;
+        }
     }
     CamType typeOfCamMain, typeOfCamVent;
     //handles which cam to turn on

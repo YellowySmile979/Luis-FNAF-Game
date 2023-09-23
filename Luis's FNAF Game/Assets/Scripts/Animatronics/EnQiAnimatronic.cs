@@ -6,9 +6,10 @@ public class EnQiAnimatronic : BaseAnimatronic
 {
     [Header("Songs")]
     public List<AudioClip> listOfAllSongs = new List<AudioClip>();
-    public AudioClip triggerSong;
+    public AudioClip triggerSong, current, audioClip;
     public float setTimeTillDeath = 7f, timeTillDeath;
-    public AudioClip current, audioClip;
+    public float setIdleTime = 5f, idleTime;
+    [SerializeField] bool hasFirstSongPlayed, playing;
 
     public override void AnimatronicBehaviour()
     {
@@ -19,6 +20,8 @@ public class EnQiAnimatronic : BaseAnimatronic
     float counterr = 0;
     public void EnQiMovement(bool skip = false)
     {
+        idleTime = setIdleTime;
+        if (!hasFirstSongPlayed) hasFirstSongPlayed = true;
         AudioManager.Instance.audioSource.Stop();
         if (!skip)
         {
@@ -52,11 +55,28 @@ public class EnQiAnimatronic : BaseAnimatronic
     {
         audioClip = clip;
     }
+    protected override void OtherStart()
+    {
+        idleTime = setIdleTime;
+    }
     void FixedUpdate()
     {
+        playing = AudioManager.Instance.audioSource.isPlaying;
         if(current != null)
         {
             UIManager.Instance.SongPlayer(AudioManager.Instance.audioSource.time, current.length, current.name);
+        }
+        if (!AudioManager.Instance.audioSource.isPlaying && hasFirstSongPlayed)
+        {
+            //print("isPlaying: " + AudioManager.Instance.audioSource.isPlaying);
+            if (idleTime > 0)
+            {
+                idleTime -= Time.deltaTime;
+            }
+            else
+            {
+                EnQiAttack();
+            }
         }
 
         if (isTriggerSong)
