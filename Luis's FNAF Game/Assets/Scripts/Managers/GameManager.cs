@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -53,7 +54,9 @@ public class GameManager : MonoBehaviour
         else if(GameState == GameState.Win)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
+            AudioManager.Instance.audioSource.Stop();
             //play win sequence
+            SceneManager.LoadScene("MainMenu");
         }
         else if(GameState == GameState.Dying)
         {

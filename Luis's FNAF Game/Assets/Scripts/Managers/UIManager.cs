@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Songs")]
     public Image songProgress;
-    public Text songPlayingName;
+    public Text songPlayingName, pauseText;
 
     public static UIManager Instance;
 

@@ -9,8 +9,11 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioMixer mixer;
 
+    public const string mixerInGame = "InGameVolume";
+
     public const string musicKey = "musicVolume";
     public const string sfxKey = "sfxVolume";
+    public const string inGameKey = "inGameVolume";
 
     public static AudioManager Instance;
 
@@ -26,13 +29,15 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this);
         }
+        PlayerPrefs.SetFloat(inGameKey, 0.31622f);
         LoadVolume();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        float presetVol = PlayerPrefs.GetFloat(inGameKey, 1f);
+        mixer.SetFloat(mixerInGame, Mathf.Log10(presetVol) * 20);
     }
 
     // Update is called once per frame

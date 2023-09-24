@@ -57,6 +57,8 @@ public class CamSystemManager : MonoBehaviour
     public void ShowSongPlayer()
     {
         songPlayer.SetActive(true);
+        float presetDefaultVol = 1f;
+        AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetDefaultVol) * 20);
     }
     //skips the song forward by 1
     public void SkipForward()
@@ -64,6 +66,11 @@ public class CamSystemManager : MonoBehaviour
         EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
         //sets the current playing clip in the audiosource to the clip var
         AudioClip clip = AudioManager.Instance.audioSource.clip;
+
+        UIManager.Instance.pauseText.text = " ";
+        isPaused = true;
+        enQiAnimatronic.counterr = 0;
+
         //gets the index of that clip and sets it to the index int
         int index = enQiAnimatronic.listOfAllSongs.FindIndex(0, enQiAnimatronic.listOfAllSongs.Count, s => s == clip);
         
@@ -75,7 +82,7 @@ public class CamSystemManager : MonoBehaviour
         {
             index = enQiAnimatronic.listOfAllSongs.Count - 1;
         }
-        else if(index > enQiAnimatronic.listOfAllSongs.Count)
+        else if(index > enQiAnimatronic.listOfAllSongs.Count - 1)
         {
             index = 0;
         }
@@ -88,6 +95,11 @@ public class CamSystemManager : MonoBehaviour
     {
         EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
         AudioClip clip = AudioManager.Instance.audioSource.clip;
+
+        UIManager.Instance.pauseText.text = " ";
+        isPaused = true;
+        enQiAnimatronic.counterr = 0;
+
         int index = enQiAnimatronic.listOfAllSongs.FindIndex(0, enQiAnimatronic.listOfAllSongs.Count, s => s == clip);
         
         index--;
@@ -97,7 +109,7 @@ public class CamSystemManager : MonoBehaviour
         {
             index = enQiAnimatronic.listOfAllSongs.Count - 1;
         }
-        else if (index > enQiAnimatronic.listOfAllSongs.Count)
+        else if (index > enQiAnimatronic.listOfAllSongs.Count - 1)
         {
             index = 0;
         }
@@ -112,15 +124,18 @@ public class CamSystemManager : MonoBehaviour
         if(!isPaused)
         {
             AudioManager.Instance.audioSource.Pause();
+            UIManager.Instance.pauseText.text = "PAUSED";
         }
         else
         {
             AudioManager.Instance.audioSource.UnPause();
+            UIManager.Instance.pauseText.text = " ";
+
             EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
             enQiAnimatronic.idleTime = enQiAnimatronic.setIdleTime;
         }
     }
-    CamType typeOfCamMain, typeOfCamVent;
+    
     //handles which cam to turn on
     public void VentCamOrMainCam()
     {
@@ -150,6 +165,11 @@ public class CamSystemManager : MonoBehaviour
             GameManager.Instance.usage++;
             leftSideStuff.SetActive(false);
             rightSideStuff.SetActive(false);
+            
+            if (typeOfCam == CamType.Storage)
+            {
+                ShowSongPlayer();
+            }
         }
         else
         {
@@ -157,6 +177,10 @@ public class CamSystemManager : MonoBehaviour
             GameManager.Instance.usage--;
             leftSideStuff.SetActive(true);
             rightSideStuff.SetActive(true);
+
+            songPlayer.SetActive(false);
+            float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
+            AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
         }
         //sets the initial cam that the player would be looking at
         if (!hasSentInitialCam)
@@ -165,9 +189,16 @@ public class CamSystemManager : MonoBehaviour
             hasSentInitialCam = true;
         }
     }
+    CamType typeOfCam;
     //checks to see which cam is activated and prevent that cam from being able to be activated again
     public void ActivatedCam(CamType camtype)
     {
+        typeOfCam = camtype;
+        if (camtype != CamType.Storage && openOrClose)
+        {
+            float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
+            AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
+        }
         switch (camtype)
         {
             case CamType.MainStage:
