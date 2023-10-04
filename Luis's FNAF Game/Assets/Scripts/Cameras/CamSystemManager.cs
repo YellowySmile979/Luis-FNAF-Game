@@ -145,7 +145,12 @@ public class CamSystemManager : MonoBehaviour
             mainButton.interactable = false;
             ventButton.interactable = true;
             mainSys.SetActive(true);
-            ventSys.SetActive(false);            
+            ventSys.SetActive(false);
+
+            int index = camMainButtons.FindIndex(s => !s.interactable);
+            typeOfCam = camMainBgs[index].camType;
+
+            UIManager.Instance.ChangeCamName(typeOfCam);
         }
         else
         {
@@ -153,6 +158,11 @@ public class CamSystemManager : MonoBehaviour
             mainButton.interactable = true;
             mainSys.SetActive(false);
             ventSys.SetActive(true);
+
+            int index = ventCamButtons.FindIndex(s => !s.interactable);
+            typeOfCam = camVentBgs[index].camType;
+
+            UIManager.Instance.ChangeCamName(typeOfCam);
         }
     }
     //handles the turning on or off of the moniter
@@ -199,6 +209,7 @@ public class CamSystemManager : MonoBehaviour
             float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
             AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
         }
+        UIManager.Instance.ChangeCamName(camtype);
         switch (camtype)
         {
             case CamType.MainStage:

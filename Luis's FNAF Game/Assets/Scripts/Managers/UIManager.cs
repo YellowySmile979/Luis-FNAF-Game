@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     public Image songProgress;
     public Text songPlayingName, pauseText;
 
+    [Header("Cam Name")]
+    public Text camName;
+
     public static UIManager Instance;
 
     void Awake()
@@ -184,5 +187,67 @@ public class UIManager : MonoBehaviour
     {
         songProgress.fillAmount = progressOfSong / totalDuration;
         songPlayingName.text = nameOfSong;
+    }
+    public void ChangeCamName(CamType type)
+    {
+        string name = "";
+        switch (type) 
+        {
+            case CamType.MainStage:
+                name = "Main Stage";
+                break;
+            case CamType.MainHall1:
+                name = "Main Hall 1";
+                break;
+            case CamType.MainHall2:
+                name = "Main Hall 2";
+                break;
+            case CamType.PartyRoom:
+                name = "Party Room";
+                break;
+            case CamType.PartsAndService:
+                name = "Parts & Service";
+                break;
+            case CamType.Kitchen:
+                name = "Kitchen";
+                break;
+            case CamType.EastHallway:
+                name = "East Hallway";
+                break;
+            case CamType.WestHallway:
+                name = "West Hallway";
+                break;
+            case CamType.Storage:
+                name = "Storage";
+                break;
+            case CamType.Entrance:
+                name = "Entrance";
+                break;
+            case CamType.MainHall1Vent:
+                name = "Main Hall 1 Vent";
+                break;
+            case CamType.MainHall2Vent:
+                name = "Main Hall 2 Vent";
+                break;
+            case CamType.PartyRoomVent:
+                name = "Party Room Vent";
+                break;
+            case CamType.PartsAndServiceVent:
+                name = "Parts & Service Vent";
+                break;
+            case CamType.KitchenVent:
+                name = "Kitchen Vent";
+                break;
+            case CamType.EastHallwayVent:
+                name = "East Hallway Vent";
+                break;
+            case CamType.WestHallwayVent:
+                name = "West Hallway Vent";
+                break;
+            case CamType.StorageVent:
+                name = "Storage Vent";
+                break;
+        }
+        camName.text = name + " Cam";
     }
 }
