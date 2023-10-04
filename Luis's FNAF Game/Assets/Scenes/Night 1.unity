@@ -344,8 +344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 318.5182, y: 160.17532}
-  m_SizeDelta: {x: 637.0366, y: 320.3505}
+  m_AnchoredPosition: {x: 388.02502, y: 230.32516}
+  m_SizeDelta: {x: 758.616, y: 78.9859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &20401544
 MonoBehaviour:
@@ -374,13 +374,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 72
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: West Hallway Cam
+  m_Text: Parts & Service Vent Cam
 --- !u!222 &20401545
 CanvasRenderer:
   m_ObjectHideFlags: 0

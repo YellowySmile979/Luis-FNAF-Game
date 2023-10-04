@@ -190,7 +190,7 @@ public class UIManager : MonoBehaviour
     }
     public void ChangeCamName(CamType type)
     {
-        string name = "";
+        string name = null;
         switch (type) 
         {
             case CamType.MainStage:
