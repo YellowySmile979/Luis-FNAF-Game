@@ -81,6 +81,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
     {
 
     }
+    int aa = 0;
     //handles checks for EnQi
     void SongCheckForEnQi()
     {
@@ -98,6 +99,14 @@ public abstract class BaseAnimatronic : MonoBehaviour
                     if(this.animatronicType == AnimatronicType.EnQi)
                     {
                         print("EnQi: " + randomNumber);
+                        //increases a counter so that should the the chekcs fail too often, it will trigger
+                        aa++;
+                        if (aa > 10)
+                        {
+                            AnimatronicBehaviour();
+                            aa = 0;
+                            print("aa: " + aa);
+                        }
                     }
                     if(randomNumber <= AILevel)
                     {
@@ -105,11 +114,13 @@ public abstract class BaseAnimatronic : MonoBehaviour
                         if(randomNo <= 50)
                         {
                             AnimatronicBehaviour();
+                            aa = 0;
                         }
                         else
                         {
                             //do nothing
                             print("Song does not change");
+                            aa++;
                         }
                     }
                     timeToMove = setTimeToMove;
@@ -147,6 +158,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
             }
         }
     }
+    int bb = 0;
     //handles checks for jade's movements and whatever
     void VentLockChecksForJade()
     {
@@ -164,16 +176,26 @@ public abstract class BaseAnimatronic : MonoBehaviour
                     if (this.animatronicType == AnimatronicType.Jade)
                     {
                         print("Jade: " + randomNumber);
+                        //ensures that jade will move eventually
+                        bb++;
+                        if(bb >= 5)
+                        {
+                            bb = 0;
+                            AnimatronicBehaviour();
+                            print("bb: " + bb);
+                        }
                     }
                     if (randomNumber <= AILevel)
                     {
                         AnimatronicBehaviour();
+                        bb = 0;
                     }
                     timeToMove = setTimeToMove;
                 }
             }
         }
     }
+    int cc = 0;
     void DoorChecksForMiaAndShaun()
     {
         //handles checks for the movement and whatever
@@ -193,14 +215,31 @@ public abstract class BaseAnimatronic : MonoBehaviour
                         if(this.animatronicType == AnimatronicType.Mia)
                         {
                             print("Mia: " + randomNumber);
+                            //ensures that mia eventually moves
+                            cc++;
+                            if(cc >= 10)
+                            {
+                                cc = 0;
+                                AnimatronicBehaviour();
+                                print("cc mia: " + cc);
+                            }
                         }
                         else if(this.animatronicType == AnimatronicType.Shaun)
                         {
                             print("Shaun: " + randomNumber);
+                            //ensures shaun eventually moves
+                            cc++;
+                            if (cc >= 10)
+                            {
+                                cc = 0;
+                                AnimatronicBehaviour();
+                                print("cc shaun: " + cc);
+                            }
                         }
                         if (randomNumber <= AILevel)
                         {
                             AnimatronicBehaviour();
+                            cc = 0;
                         }
                         timeToMove = setTimeToMove;
                     }

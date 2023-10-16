@@ -17,6 +17,8 @@ public class CamSystemManager : MonoBehaviour
     public GameObject leftSideStuff, rightSideStuff;
 
     public GameObject songPlayer;
+    public bool delay = false;
+    public float maxDelayTime = 20f, delayTime;
 
     [Header("Cams")]
     public GameObject moniterBG;
@@ -46,12 +48,19 @@ public class CamSystemManager : MonoBehaviour
         PartsAndServiceVent();
         MainStageCamMain();
         songPlayer.SetActive(false);
+
+        delayTime = maxDelayTime;
+
+        if (AudioManager.Instance.audioSource.clip == null)
+        {
+            UIManager.Instance.songPlayingName.text = "Nothing is Playing";
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!done) StartingSong();
     }
     //shows the song player
     public void ShowSongPlayer()
@@ -59,6 +68,29 @@ public class CamSystemManager : MonoBehaviour
         songPlayer.SetActive(true);
         float presetDefaultVol = 1f;
         AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetDefaultVol) * 20);
+    }
+    bool done = false;
+    void StartingSong()
+    {
+        if (delay)
+        {
+            if(delayTime > 0)
+            {
+                delayTime -= Time.deltaTime;
+            }
+            else
+            {
+                EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+                enQiAnimatronic.EnQiMovement(false);
+                done = true;
+            }
+        }
+        else
+        {
+            EnQiAnimatronic enQiAnimatronic = FindObjectOfType<EnQiAnimatronic>();
+            enQiAnimatronic.EnQiMovement(false);
+            done = true;
+        }
     }
     //skips the song forward by 1
     public void SkipForward()

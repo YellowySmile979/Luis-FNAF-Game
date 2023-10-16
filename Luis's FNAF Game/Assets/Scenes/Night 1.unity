@@ -11254,6 +11254,9 @@ MonoBehaviour:
   leftSideStuff: {fileID: 2019777976}
   rightSideStuff: {fileID: 1887539419}
   songPlayer: {fileID: 902893137}
+  delay: 1
+  maxDelayTime: 5
+  delayTime: 0
   moniterBG: {fileID: 1159073425}
   camMainBgs:
   - {fileID: 11400000, guid: 4b458f5d65a95694e8466c0baafa4b95, type: 2}
