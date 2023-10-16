@@ -31,11 +31,11 @@ public class GameManager : MonoBehaviour
         nightTime = maxNightTime;
         power = maxPower;
     }
-
+    bool skullEmoji = false;
     // Update is called once per frame
     void Update()
     {
-        if(nightHasStarted)
+        if(nightHasStarted && !skullEmoji)
         {
             Night();
             AnimatronicManager.Instance.UpdateAILevels(nightTime);
@@ -62,12 +62,14 @@ public class GameManager : MonoBehaviour
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
             AudioManager.Instance.audioSource.Stop();
+            skullEmoji = true;
             //play dying sequence depending on which animatronic jumpscares Luis
         }
         else if(GameState == GameState.Lose)
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
             AudioManager.Instance.audioSource.Stop();
+            skullEmoji = true;
             //happens if jump scare
         }
         else if(GameState == GameState.PowerOutage)
