@@ -15,6 +15,11 @@ TagManager:
   - PartyRoom
   - Entrance
   - WaitingtoKill
+  - Mia
+  - Shaun
+  - Jade
+  - En Qi
+  - Elijah
   layers:
   - Default
   - TransparentFX

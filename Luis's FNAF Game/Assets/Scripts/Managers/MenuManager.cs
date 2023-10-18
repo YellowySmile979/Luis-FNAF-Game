@@ -20,6 +20,16 @@ public class MenuManager : MonoBehaviour
     public Image songProgress;
     AudioClip audioClip, current;
 
+    [Header("Continue")]
+    public float night = 0f;
+    public const string nightKey = "Night";
+    
+    public Button continueButton;
+
+    [Header("Custom Night")]
+    public bool open = false;
+    public GameObject customNight;
+
     public static MenuManager Instance;
 
     void Awake()
@@ -38,6 +48,11 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         InGameAudioNormal();
+
+        if(night <= 0)
+        {
+            continueButton.interactable = false;
+        }
     }
 
     // Update is called once per frame
@@ -48,7 +63,58 @@ public class MenuManager : MonoBehaviour
             SongProgress(AudioManager.Instance.audioSource.time, current.length, current.name);
         }
     }
-    //songs
+    public void OpenCustomNight()
+    {
+        open = !open;
+        if(open)
+        {
+            customNight.SetActive(true);
+            for(int i = 0; i < listOfMainMenuStuff.Count; i++)
+            {
+                listOfMainMenuStuff[i].SetActive(false);
+            }
+        }
+    }
+    public void CloseCustomNight()
+    {
+        open = !open;
+        if (!open)
+        {
+            customNight.SetActive(false);
+            for (int i = 0; i < listOfMainMenuStuff.Count; i++)
+            {
+                listOfMainMenuStuff[i].SetActive(true);
+            }
+        }
+    }
+    public void ContinueGame()
+    {
+        night = PlayerPrefs.GetFloat(nightKey);
+        switch (night) 
+        {
+            default:
+                SceneManager.LoadScene("Night 1");
+                break;
+            case 1:
+                SceneManager.LoadScene("Night 1");
+                break;
+            case 2:
+                SceneManager.LoadScene("Night 2");
+                break;
+            case 3:
+                SceneManager.LoadScene("Night 3");
+                break;
+            case 4:
+                SceneManager.LoadScene("Night 4");
+                break;
+            case 5:
+                SceneManager.LoadScene("Night 5");
+                break;
+            case 6:
+                SceneManager.LoadScene("Night 6");
+                break;
+        }
+    }
     public void SongPlaylist(int index)
     {
         AudioManager.Instance.audioSource.Stop();
@@ -180,6 +246,10 @@ public class MenuManager : MonoBehaviour
     }
     public void StartGame()
     {
+        PlayerPrefs.SetFloat(nightKey, 1);
+        night = PlayerPrefs.GetFloat(nightKey);
+        continueButton.interactable = true;
+
         SceneManager.LoadScene(loadScene);
     }
 }

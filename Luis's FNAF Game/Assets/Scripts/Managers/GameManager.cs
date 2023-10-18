@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
         {
             AnimatronicManager.Instance.allAnimsCanAttack = false;
             AudioManager.Instance.audioSource.Stop();
+
+            float nightNumber = PlayerPrefs.GetFloat("Night");
+            if(nightNumber < 6) nightNumber++;
+            PlayerPrefs.SetFloat("Night", nightNumber);
+
             //play win sequence
             SceneManager.LoadScene("MainMenu");
         }
