@@ -75,6 +75,11 @@ public class GameManager : MonoBehaviour
             AnimatronicManager.Instance.allAnimsCanAttack = false;
             AudioManager.Instance.audioSource.Stop();
             skullEmoji = true;
+
+            if(SceneManager.GetActiveScene().name == "Night 6")
+            {
+                PlayerPrefs.SetInt("Can Custom Night", 1);
+            }
             //happens if jump scare
         }
         else if(GameState == GameState.PowerOutage)

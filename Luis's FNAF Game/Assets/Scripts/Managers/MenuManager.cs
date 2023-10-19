@@ -30,6 +30,20 @@ public class MenuManager : MonoBehaviour
     public bool open = false;
     public GameObject customNight;
 
+    public Transform buttonParent;
+    public Button customNightButton;
+
+    public const string canCustomNight = "Can Custom Night";
+
+    [Header("Command Prompt")]
+    public GameObject commandPrompt;
+    public InputField inputField;
+    public Text previousCommands;
+
+    public string input;
+
+    public const string bdayVidPasscode = "PNmQyXOtx3n$.{i";
+
     public static MenuManager Instance;
 
     void Awake()
@@ -61,6 +75,58 @@ public class MenuManager : MonoBehaviour
         if (current != null)
         {
             SongProgress(AudioManager.Instance.audioSource.time, current.length, current.name);
+        }
+        if(PlayerPrefs.GetInt(canCustomNight) == 1)
+        {
+            customNightButton.gameObject.SetActive(true);
+
+            customNightButton.transform.SetParent(buttonParent.transform);
+            customNightButton.transform.SetSiblingIndex(2);
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            if (Input.GetKey(KeyCode.H))
+            {
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    commandPrompt.SetActive(true);
+                }
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Escape) && commandPrompt.activeSelf == true)
+        {
+            commandPrompt.SetActive(false);
+        }
+    }
+    public void ReadStringInput(string s)
+    {
+        s = inputField.text;
+
+        input = s;
+
+        switch (input)
+        {
+            default:
+                previousCommands.text = "The command '" + input + "' does not exist! Please try again.";
+                break;
+            case bdayVidPasscode:
+                //TO DO: create function that handles the bday video
+                break;
+            case "Your mom":
+                previousCommands.text = "Luis. No. Stop. You are old enough to not do this.";
+                break;
+            case "sex":
+                previousCommands.text = "Seriously? sex? Of all things to type. sex?";
+                break;
+            case "balls":
+                previousCommands.text = "No.";
+                break;
+            case "tits":
+                previousCommands.text = "Ay yo! Ay YO!";
+                break;
+            case "Putang Ina":
+                previousCommands.text = "";
+                break;
         }
     }
     public void OpenCustomNight()
@@ -229,6 +295,7 @@ public class MenuManager : MonoBehaviour
     }
     public void BackOutOfSettings()
     {
+        current = null;
         openOrCloseSettings = false;
         if (!openOrCloseSettings)
         {
@@ -240,15 +307,23 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+    }
     public void Quit()
     {
         Application.Quit();
     }
     public void StartGame()
     {
+        PlayerPrefs.DeleteAll();
+
         PlayerPrefs.SetFloat(nightKey, 1);
         night = PlayerPrefs.GetFloat(nightKey);
         continueButton.interactable = true;
+
+        PlayerPrefs.SetInt(canCustomNight, 0);
 
         SceneManager.LoadScene(loadScene);
     }
