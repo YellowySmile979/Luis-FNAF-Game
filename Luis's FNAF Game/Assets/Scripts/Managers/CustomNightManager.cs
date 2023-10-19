@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CustomNightManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CustomNightManager : MonoBehaviour
                         elijahKey = "Elijah";
 
     [Header("Image Opacity")]
-
+    public Image[] profilePicsCover;
 
     public static CustomNightManager Instance;
 
@@ -40,7 +41,39 @@ public class CustomNightManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ImageFade();
+    }
+    void ImageFade()
+    {
+        float miaShaderNumber = (PlayerPrefs.GetFloat(miaKey) / 20) - 0.2f;
+        if (miaShaderNumber <= 0) miaShaderNumber = 0;
+        profilePicsCover[0].color = new Color(profilePicsCover[0].color.r, profilePicsCover[0].color.g, profilePicsCover[0].color.b, miaShaderNumber);
+
+        float shaunShaderNumber = (PlayerPrefs.GetFloat(shaunKey) / 20) - 0.2f;
+        if (shaunShaderNumber <= 0) shaunShaderNumber = 0;
+        profilePicsCover[1].color = new Color(profilePicsCover[1].color.r, profilePicsCover[1].color.g, profilePicsCover[1].color.b, shaunShaderNumber);
+
+        float jadeShaderNumber = (PlayerPrefs.GetFloat(jadeKey) / 20) - 0.2f;
+        if (jadeShaderNumber <= 0) jadeShaderNumber = 0;
+        profilePicsCover[2].color = new Color(profilePicsCover[2].color.r, profilePicsCover[2].color.g, profilePicsCover[2].color.b, jadeShaderNumber);
+
+        float enQiShaderNumber = (PlayerPrefs.GetFloat(enQiKey) / 20) - 0.2f;
+        if (enQiShaderNumber <= 0) enQiShaderNumber = 0;
+        profilePicsCover[3].color = new Color(profilePicsCover[3].color.r, profilePicsCover[3].color.g, profilePicsCover[3].color.b, enQiShaderNumber);
+
+        float elijahShaderNumber = (PlayerPrefs.GetFloat(elijahKey) / 20) - 0.2f;
+        if (elijahShaderNumber <= 0) elijahShaderNumber = 0;
+        profilePicsCover[4].color = new Color(profilePicsCover[4].color.r, profilePicsCover[4].color.g, profilePicsCover[4].color.b, elijahShaderNumber);
+    }
+    public void StartCustomNight()
+    {
+        PlayerPrefs.SetInt("Custom Night", 1);
+        SceneManager.LoadScene("Custom Night");
+    }
+    public void CloseMenu()
+    {
+        PlayerPrefs.SetInt("Custom Night", 0);
+        MenuManager.Instance.CloseCustomNight();      
     }
 
     public void IncreaseMiaLvl()

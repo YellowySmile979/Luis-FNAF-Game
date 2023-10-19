@@ -15,6 +15,12 @@ public class AnimatronicManager : MonoBehaviour
 
     public float miaAILevel, shaunAILevel, jadeAILevel, elijahAILevel, enQiAILevel;
 
+    public const string miaKey = "Mia",
+                        shaunKey = "Shaun",
+                        jadeKey = "Jade",
+                        enQiKey = "En Qi",
+                        elijahKey = "Elijah";
+
     [Header("Prevention Measures")]
     public bool isLeftDoorClosed = false;
     public bool isRightDoorClosed = false;
@@ -39,6 +45,15 @@ public class AnimatronicManager : MonoBehaviour
         if (jade == null) jade = FindObjectOfType<JadeAnimatronic>(true).gameObject;
         if (elijah == null) elijah = FindObjectOfType<ElijahAnimatronic>(true).gameObject;
         if (enQi == null) enQi = FindObjectOfType<EnQiAnimatronic>(true).gameObject;
+
+        if (PlayerPrefs.GetInt("Custom Night") == 1)
+        {
+            miaAILevel = PlayerPrefs.GetFloat(miaKey);
+            shaunAILevel = PlayerPrefs.GetFloat(shaunKey);
+            jadeAILevel = PlayerPrefs.GetFloat(jadeKey);
+            enQiAILevel = PlayerPrefs.GetFloat(enQiKey);
+            elijahAILevel = PlayerPrefs.GetFloat(elijahKey);
+        }
     }
     // Start is called before the first frame update
     void Start()
