@@ -60,7 +60,7 @@ public class CamSystemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!done) StartingSong();
+        if(!done && AnimatronicManager.Instance.enQiAILevel > 0) StartingSong();
     }
     //shows the song player
     public void ShowSongPlayer()

@@ -3280,7 +3280,7 @@ MonoBehaviour:
   shaunAILevel: 0
   jadeAILevel: 0
   elijahAILevel: 0
-  enQiAILevel: 6
+  enQiAILevel: 0
   isLeftDoorClosed: 0
   isRightDoorClosed: 0
   leftDoor: {fileID: 1814166892}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,10 +16,23 @@ public class MenuManager : MonoBehaviour
     [Header("Settings")]
     public GameObject settings;
     bool openOrCloseSettings;
+
+    public GameObject videoMenu;
+    public CanvasScaler canvasScaler;
+    public InputField resoXInput, resoYInput;
+    public float resoLength = 1920, resoWidth = 1080;
+    public int resoXCharLim = 4, resoYCharLim = 4;
+    public string resoCharLimit = "0123456789";
+
+    public GameObject audioMenu;
     public List<AudioClip> listOfSongsForEnQi = new List<AudioClip>();
     public Text pauseText, currentSongName;
     public Image songProgress;
     AudioClip audioClip, current;
+
+    public GameObject extrasMenu;
+    public List<Image> characters = new List<Image>();
+    public List<Text> characterDescription = new List<Text>();
 
     [Header("Continue")]
     public float night = 0f;
@@ -39,7 +53,10 @@ public class MenuManager : MonoBehaviour
     public GameObject commandPrompt;
     public InputField inputField;
     public Text previousCommands;
+    public GameObject bdayObj;
+    public VideoPlayer videoPlayer;
 
+    public int characterLimit = 20;
     public string input;
 
     public const string bdayVidPasscode = "PNmQyXOtx3n$.{i";
@@ -67,6 +84,19 @@ public class MenuManager : MonoBehaviour
         {
             continueButton.interactable = false;
         }
+
+        inputField.characterLimit = characterLimit;
+
+        resoXInput.characterLimit = resoXCharLim;
+        resoXInput.onValidateInput = (string text, int charIndex, char addedChar) =>
+        {
+            return ValidateChar(resoCharLimit, addedChar);
+        };
+        resoYInput.characterLimit = resoYCharLim;
+        resoYInput.onValidateInput = (string text, int charIndex, char addedChar) =>
+        {
+            return ValidateChar(resoCharLimit, addedChar);
+        };
     }
 
     // Update is called once per frame
@@ -101,6 +131,84 @@ public class MenuManager : MonoBehaviour
             commandPrompt.SetActive(false);
         }
     }
+
+    char ValidateChar(string validCharacters, char addedChar)
+    {
+        if (validCharacters.IndexOf(addedChar) != -1)
+        {
+            //valid
+            return addedChar;
+        }
+        else
+        {
+            //invalid
+            return '\0';
+        }
+    }
+    public void XResolution(string s)
+    {
+        s = resoXInput.text;
+
+        resoLength = float.Parse(s);
+
+        if(resoLength != 1920)
+        {
+            resoLength = 1920;
+            resoXInput.text = "1920";
+        }
+
+        canvasScaler.referenceResolution = new Vector2(resoLength, canvasScaler.referenceResolution.y);
+    }
+    public void YResolution(string s)
+    {
+        s = resoYInput.text;
+
+        resoWidth = float.Parse(s);
+        
+        if(resoWidth!= 1080)
+        {
+            resoWidth = 1080;
+            resoYInput.text = "1080";
+        }
+
+        canvasScaler.referenceResolution = new Vector2(canvasScaler.referenceResolution.x, resoWidth);
+    }
+    IEnumerator PlayBDayVid()
+    {
+        AudioManager.Instance.audioSource.Stop();
+
+        previousCommands.text = "Playing video in... 3";
+        yield return new WaitForSecondsRealtime(1f);
+
+        previousCommands.text = "Playing video in... 2";
+        yield return new WaitForSecondsRealtime(1f);
+
+        previousCommands.text = "Playing video in... 1";
+        yield return new WaitForSecondsRealtime(1f);
+
+        previousCommands.text = "Did you enjoy the video?";
+        inputField.text = "Enter command...";
+        input = null;
+
+        bdayObj.SetActive(true);
+
+        float length = videoPlayer.frameCount - 1;
+        while (true)
+        {            
+            float currentLength = videoPlayer.frame;
+
+            print("current length: " + currentLength);
+            print("total: " + length);
+
+            if (currentLength == length)
+            {
+                bdayObj.SetActive(false);
+                break;
+            }
+
+            yield return new WaitForSeconds(2f);
+        }
+    }
     public void ReadStringInput(string s)
     {
         s = inputField.text;
@@ -113,9 +221,9 @@ public class MenuManager : MonoBehaviour
                 previousCommands.text = "The command '" + input + "' does not exist! Please try again.";
                 break;
             case bdayVidPasscode:
-                //TO DO: create function that handles the bday video
+                StartCoroutine(PlayBDayVid());
                 break;
-            case "Your mom":
+            case "your mom":
                 previousCommands.text = "Luis. No. Stop. You are old enough to not do this.";
                 break;
             case "sex":
@@ -127,8 +235,8 @@ public class MenuManager : MonoBehaviour
             case "tits":
                 previousCommands.text = "Ay yo! Ay YO!";
                 break;
-            case "Putang Ina":
-                previousCommands.text = "";
+            case "putang ina":
+                previousCommands.text = "ano ba? pinisil ko ung ina mo kanina";
                 break;
             case "close":
                 previousCommands.text = "Awaiting command...";
