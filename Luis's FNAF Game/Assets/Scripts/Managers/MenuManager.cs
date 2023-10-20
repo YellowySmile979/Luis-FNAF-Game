@@ -95,6 +95,9 @@ public class MenuManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Escape) && commandPrompt.activeSelf == true)
         {
+            previousCommands.text = "Awaiting command...";
+            inputField.text = "Enter command...";
+            input = "Enter command...";
             commandPrompt.SetActive(false);
         }
     }
@@ -126,6 +129,12 @@ public class MenuManager : MonoBehaviour
                 break;
             case "Putang Ina":
                 previousCommands.text = "";
+                break;
+            case "close":
+                previousCommands.text = "Awaiting command...";
+                inputField.text = "Enter command...";
+                input = null;
+                commandPrompt.SetActive(false);
                 break;
         }
     }
