@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : MonoBehaviour, IDataPersistence
 {
     [Header("Main Buttons")]
     public List<GameObject> listOfMainMenuStuff = new List<GameObject>();
@@ -32,7 +32,11 @@ public class MenuManager : MonoBehaviour
 
     public GameObject extrasMenu;
     public List<Image> characters = new List<Image>();
-    public List<Text> characterDescription = new List<Text>();
+    public Text characterDescription, characterName;
+    [Range(0, 4)]
+    int chosenCharacter;
+
+    public string characterDescriptionText, characterNameText;
 
     [Header("Continue")]
     public float night = 0f;
@@ -130,8 +134,43 @@ public class MenuManager : MonoBehaviour
             input = "Enter command...";
             commandPrompt.SetActive(false);
         }
+
+        CharacterDescriptionAndName();
     }
 
+    public void LoadData(CharacterDescriptionData data)
+    {
+        this.characterDescriptionText = data.characterDescription;
+        this.characterNameText = data.characterName;
+        this.chosenCharacter = data.chosenCharacter;
+
+        data.descriptions.TryGetValue(chosenCharacter, out characterDescriptionText);
+    }
+    public void SaveData(ref CharacterDescriptionData data)
+    {
+        data.characterDescription = this.characterDescriptionText;
+        data.characterName = this.characterNameText;
+        data.chosenCharacter = this.chosenCharacter;
+    }
+
+    public void CharacterDescriptionAndName()
+    {
+        switch (chosenCharacter)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+        this.characterDescription.text = this.characterDescriptionText;
+        this.characterName.text = this.characterNameText;
+    }
     char ValidateChar(string validCharacters, char addedChar)
     {
         if (validCharacters.IndexOf(addedChar) != -1)
