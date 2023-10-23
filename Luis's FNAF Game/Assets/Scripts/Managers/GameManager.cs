@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     [Header("Game State")]
     public GameState GameState;
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     bool nightHasStarted = false;
     public float maxNightTime = 300f;
     [SerializeField] float nightTime;
+    float nightNumber;
 
     [Header("Power")]
     public float maxPower = 1000f;
@@ -57,7 +58,11 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.audioSource.Stop();
 
             float nightNumber = PlayerPrefs.GetFloat("Night");
-            if(nightNumber < 6) nightNumber++;
+            if (nightNumber == 1) nightNumber = 1;
+            if(nightNumber < 6) nightNumber++;            
+            this.nightNumber = nightNumber;
+            print("Next Night: " + this.nightNumber);
+            DataPersistenceManager.Instance.SaveGame();
             PlayerPrefs.SetFloat("Night", nightNumber);
 
             //play win sequence
@@ -112,6 +117,15 @@ public class GameManager : MonoBehaviour
         {
             GameState = GameState.PowerOutage;
         }
+    }
+
+    public void LoadData(CharacterDescriptionData data)
+    {
+        //not needed
+    }
+    public void SaveData(ref CharacterDescriptionData data)
+    {
+        data.night = this.nightNumber;
     }
 }
 public enum GameState

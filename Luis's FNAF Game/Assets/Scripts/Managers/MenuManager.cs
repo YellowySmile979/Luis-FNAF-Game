@@ -32,11 +32,12 @@ public class MenuManager : MonoBehaviour, IDataPersistence
 
     public GameObject extrasMenu;
     public List<Image> characters = new List<Image>();
+    public List<string> names = new List<string>();
     public Text characterDescription, characterName;
     [Range(0, 4)]
-    int chosenCharacter;
+    [SerializeField] int chosenCharacter;
 
-    public string characterDescriptionText, characterNameText;
+    public string characterDescriptionText;
 
     [Header("Continue")]
     public float night = 0f;
@@ -101,6 +102,8 @@ public class MenuManager : MonoBehaviour, IDataPersistence
         {
             return ValidateChar(resoCharLimit, addedChar);
         };
+
+        characterName.text = names[chosenCharacter];
     }
 
     // Update is called once per frame
@@ -134,42 +137,115 @@ public class MenuManager : MonoBehaviour, IDataPersistence
             input = "Enter command...";
             commandPrompt.SetActive(false);
         }
-
-        CharacterDescriptionAndName();
     }
 
     public void LoadData(CharacterDescriptionData data)
     {
         this.characterDescriptionText = data.characterDescription;
-        this.characterNameText = data.characterName;
         this.chosenCharacter = data.chosenCharacter;
+        this.night = data.night;
 
         data.descriptions.TryGetValue(chosenCharacter, out characterDescriptionText);
+        this.characterDescription.text = this.characterDescriptionText;
+
+        //Debug.Log("Character Description Text: " + characterDescriptionText);
     }
     public void SaveData(ref CharacterDescriptionData data)
     {
         data.characterDescription = this.characterDescriptionText;
-        data.characterName = this.characterNameText;
         data.chosenCharacter = this.chosenCharacter;
+        data.night = this.night;
     }
-
+    public void NextCharacter()
+    {
+        if(chosenCharacter < 4)
+        {
+            chosenCharacter++;
+        }
+        CharacterDescriptionAndName();
+    }
+    public void PrevCharacter()
+    {
+        if(chosenCharacter > 0)
+        {
+            chosenCharacter--;
+        }
+        CharacterDescriptionAndName();
+    }
     public void CharacterDescriptionAndName()
     {
         switch (chosenCharacter)
         {
             case 0:
+                characterName.text = names[chosenCharacter];
+
+                DataPersistenceManager.Instance.SaveGame();
+                //push the loaded data to all other scripts that we need it
+                foreach (IDataPersistence dataPersistenceObj in DataPersistenceManager.Instance.dataPersistenceObjects)
+                {
+                    dataPersistenceObj.LoadData(DataPersistenceManager.Instance.characterDescriptionData);
+                }
                 break;
             case 1:
+                characterName.text = names[chosenCharacter];
+
+                DataPersistenceManager.Instance.SaveGame();
+                //push the loaded data to all other scripts that we need it
+                foreach (IDataPersistence dataPersistenceObj in DataPersistenceManager.Instance.dataPersistenceObjects)
+                {
+                    dataPersistenceObj.LoadData(DataPersistenceManager.Instance.characterDescriptionData);
+                }
                 break;
             case 2:
+                characterName.text = names[chosenCharacter];
+
+                DataPersistenceManager.Instance.SaveGame();
+                //push the loaded data to all other scripts that we need it
+                foreach (IDataPersistence dataPersistenceObj in DataPersistenceManager.Instance.dataPersistenceObjects)
+                {
+                    dataPersistenceObj.LoadData(DataPersistenceManager.Instance.characterDescriptionData);
+                }
                 break;
             case 3:
+                characterName.text = names[chosenCharacter];
+
+                DataPersistenceManager.Instance.SaveGame();
+                //push the loaded data to all other scripts that we need it
+                foreach (IDataPersistence dataPersistenceObj in DataPersistenceManager.Instance.dataPersistenceObjects)
+                {
+                    dataPersistenceObj.LoadData(DataPersistenceManager.Instance.characterDescriptionData);
+                }
                 break;
             case 4:
+                characterName.text = names[chosenCharacter];
+
+                DataPersistenceManager.Instance.SaveGame();
+                //push the loaded data to all other scripts that we need it
+                foreach (IDataPersistence dataPersistenceObj in DataPersistenceManager.Instance.dataPersistenceObjects)
+                {
+                    dataPersistenceObj.LoadData(DataPersistenceManager.Instance.characterDescriptionData);
+                }
                 break;
         }
         this.characterDescription.text = this.characterDescriptionText;
-        this.characterName.text = this.characterNameText;
+    }
+    public void VideoMenu()
+    {
+        videoMenu.SetActive(true);
+        audioMenu.SetActive(false);
+        extrasMenu.SetActive(false);
+    }
+    public void AudioMenu()
+    {
+        videoMenu.SetActive(false);
+        audioMenu.SetActive(true);
+        extrasMenu.SetActive(false);
+    }
+    public void ExtrasMenu()
+    {
+        videoMenu.SetActive(false);
+        audioMenu.SetActive(false);
+        extrasMenu.SetActive(true);
     }
     char ValidateChar(string validCharacters, char addedChar)
     {
@@ -477,6 +553,7 @@ public class MenuManager : MonoBehaviour, IDataPersistence
 
         PlayerPrefs.SetFloat(nightKey, 1);
         night = PlayerPrefs.GetFloat(nightKey);
+        DataPersistenceManager.Instance.SaveGame();
         continueButton.interactable = true;
 
         PlayerPrefs.SetInt(canCustomNight, 0);

@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1839912784831006581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1839912784831006580}
+  - component: {fileID: 1839912784831006582}
+  - component: {fileID: 1839912784831006583}
+  - component: {fileID: 1839912784831006577}
+  m_Layer: 5
+  m_Name: En Qi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1839912784831006580
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839912784831006581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 671, y: 231}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1839912784831006582
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839912784831006581}
+  m_CullTransparentMesh: 1
+--- !u!114 &1839912784831006583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839912784831006581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.08926797, g: 1, b: 0, a: 0.4117647}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1839912784831006577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839912784831006581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6732993ecc4102a49bfa8bf67f3b7bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatronicData: {fileID: 11400000, guid: 360f4dabced023942961ae658160c701, type: 2}
+  animatronicType: 4
+  AILevel: 0
+  setTimeToMove: 20
+  timeToMove: 0
+  whereToStart: {fileID: 0}
+  whereIAmNow: {fileID: 0}
+  listOfAllPlacesToMove:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  counter: 0
+  listOfAllSongs:
+  - {fileID: 8300000, guid: 19fc4ee8435d59940a4feb12af2e62fb, type: 3}
+  - {fileID: 8300000, guid: a97a9d83c079c984f9773d2b8fe6c1c6, type: 3}
+  - {fileID: 8300000, guid: 74a53ebcb1f6d8340a1c51fd0d487f0c, type: 3}
+  - {fileID: 8300000, guid: 333380d894d1cf04c979b148cbdfdfdd, type: 3}
+  - {fileID: 8300000, guid: af4d231eba961d34c8d21af09c2ec292, type: 3}
+  - {fileID: 8300000, guid: 33a21ecf5469c9b4795efa8acaf70b76, type: 3}
+  - {fileID: 8300000, guid: c4ae98a5f669ab94a856e282c63ccd34, type: 3}
+  - {fileID: 8300000, guid: c42d9f6201d43c54086d325f46c3efa2, type: 3}
+  - {fileID: 8300000, guid: 39ccd73f5a44b084f8c3ac72eff691c7, type: 3}
+  - {fileID: 8300000, guid: 1bafc7135e5103e458fac55c018533fd, type: 3}
+  - {fileID: 8300000, guid: a4ce323036596194c9dcafa3bae51f98, type: 3}
+  - {fileID: 8300000, guid: da9380307fbf62445ac120271b1147a7, type: 3}
+  - {fileID: 8300000, guid: ae858a6e6b69497489f27f6ed403d36c, type: 3}
+  - {fileID: 8300000, guid: fbd92359054f3ab4dbab6d34c8a56bab, type: 3}
+  - {fileID: 8300000, guid: 6ba991a1283f4c34784f21291f766798, type: 3}
+  - {fileID: 8300000, guid: bf56207aec198cd4580874131ca77936, type: 3}
+  - {fileID: 8300000, guid: f049129e95929f645951b95ebb632f5f, type: 3}
+  - {fileID: 8300000, guid: 9414922dc82e1574bb9bd98331f3a418, type: 3}
+  - {fileID: 8300000, guid: 49fb15257ff560b4a82de31ec9bf0630, type: 3}
+  - {fileID: 8300000, guid: 25a0a1db3b5bd614286536f1e89ec14c, type: 3}
+  - {fileID: 8300000, guid: 7b40380f7ba50b840bdeba4bdf06f37a, type: 3}
+  - {fileID: 8300000, guid: de10ab2e03069d24a999d174ef9f6324, type: 3}
+  - {fileID: 8300000, guid: 3df94ab4d41e61943907b1ba34567e15, type: 3}
+  - {fileID: 8300000, guid: 439f049c7cc13b0419d22f2d94c43c1a, type: 3}
+  - {fileID: 8300000, guid: 5c5fcfd4bf53b4a4fbf66bdd1e7726ca, type: 3}
+  - {fileID: 8300000, guid: 2c3d15c989b3a314ea0d8668810d5b63, type: 3}
+  - {fileID: 8300000, guid: ac0f4bfbba07d244d9c0f24dc6866486, type: 3}
+  triggerSong: {fileID: 8300000, guid: 19fc4ee8435d59940a4feb12af2e62fb, type: 3}
+  current: {fileID: 0}
+  audioClip: {fileID: 0}
+  setTimeTillDeath: 7
+  timeTillDeath: 0
+  setIdleTime: 5
+  idleTime: 0
+  hasFirstSongPlayed: 0
+  playing: 0
+  counterr: 0

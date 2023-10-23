@@ -10,9 +10,9 @@ public class DataPersistenceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] string fileName;
 
-    CharacterDescriptionData characterDescriptionData;
-    List<IDataPersistence> dataPersistenceObjects;
-    FileDataHandler dataHandler;
+    [HideInInspector] public CharacterDescriptionData characterDescriptionData;
+    [HideInInspector] public List<IDataPersistence> dataPersistenceObjects;
+    [HideInInspector] public FileDataHandler dataHandler;
 
     public static DataPersistenceManager Instance { get; private set; }
 
@@ -70,7 +70,7 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.Save(characterDescriptionData);
     }
 
-    List<IDataPersistence> FindAllDataPersistenceObjects()
+    public List<IDataPersistence> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
         return new List<IDataPersistence>(dataPersistenceObjects);
