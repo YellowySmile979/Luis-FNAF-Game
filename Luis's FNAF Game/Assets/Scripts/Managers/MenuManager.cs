@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     public GameObject settings;
     bool openOrCloseSettings;
 
+    [Header("Video Settings")]
     public GameObject videoMenu;
     public CanvasScaler canvasScaler;
     public InputField resoXInput, resoYInput;
@@ -24,12 +25,14 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     public int resoXCharLim = 4, resoYCharLim = 4;
     public string resoCharLimit = "0123456789";
 
+    [Header("Audio Settings")]
     public GameObject audioMenu;
     public List<AudioClip> listOfSongsForEnQi = new List<AudioClip>();
     public Text pauseText, currentSongName;
     public Image songProgress;
     AudioClip audioClip, current;
 
+    [Header("Extras Menu")]
     public GameObject extrasMenu;
     public List<Image> characters = new List<Image>();
     public List<string> names = new List<string>();
@@ -38,6 +41,9 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     [SerializeField] int chosenCharacter;
 
     public string characterDescriptionText;
+
+    [Header("Credit Menu")]
+    public GameObject creditMenu;
 
     [Header("Continue")]
     public float night = 0f;
@@ -234,19 +240,30 @@ public class MenuManager : MonoBehaviour, IDataPersistence
         videoMenu.SetActive(true);
         audioMenu.SetActive(false);
         extrasMenu.SetActive(false);
+        creditMenu.SetActive(false);
     }
     public void AudioMenu()
     {
         videoMenu.SetActive(false);
         audioMenu.SetActive(true);
         extrasMenu.SetActive(false);
+        creditMenu.SetActive(false);
     }
     public void ExtrasMenu()
     {
         videoMenu.SetActive(false);
         audioMenu.SetActive(false);
         extrasMenu.SetActive(true);
+        creditMenu.SetActive(false);
     }
+    public void CreditMenu()
+    {
+        videoMenu.SetActive(false);
+        audioMenu.SetActive(false);
+        extrasMenu.SetActive(false);
+        creditMenu.SetActive(true);
+    }
+
     char ValidateChar(string validCharacters, char addedChar)
     {
         if (validCharacters.IndexOf(addedChar) != -1)
