@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public float maxPower = 1000f;
     public float power;
     public float usage = 1f;
+
+    [Header("Start")]
+    public GameObject fadeIn;
 
     public static GameManager Instance;
 
@@ -117,6 +121,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             GameState = GameState.PowerOutage;
         }
+    }
+    IEnumerator FadeIn()
+    {
+        yield return new WaitForSeconds(1f);
+        fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r, fadeIn.GetComponent<Image>().color.g, fadeIn.GetComponent<Image>().color.b, fadeIn.GetComponent<Image>().color.a);
     }
 
     public void LoadData(CharacterDescriptionData data)

@@ -161,6 +161,12 @@ public class MenuManager : MonoBehaviour, IDataPersistence
         data.characterDescription = this.characterDescriptionText;
         data.chosenCharacter = this.chosenCharacter;
         data.night = this.night;
+
+        if (data.descriptions.ContainsKey(chosenCharacter))
+        {
+            data.descriptions.Remove(chosenCharacter);
+        }
+        data.descriptions.Add(chosenCharacter, characterDescriptionText);
     }
     public void NextCharacter()
     {
