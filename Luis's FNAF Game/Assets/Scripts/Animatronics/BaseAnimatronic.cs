@@ -19,6 +19,9 @@ public abstract class BaseAnimatronic : MonoBehaviour
     public GameObject whereIAmNow;
     public List<GameObject> listOfAllPlacesToMove = new List<GameObject>();
 
+    [Header("Voicelines")]
+    public AudioClip miaVoicelines;
+
     // Start is called before the first frame update
     void Start()
     {

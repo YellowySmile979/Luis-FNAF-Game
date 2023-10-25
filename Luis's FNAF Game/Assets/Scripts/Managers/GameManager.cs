@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -13,18 +14,52 @@ public class GameManager : MonoBehaviour, IDataPersistence
     bool nightHasStarted = false;
     public float maxNightTime = 300f;
     [SerializeField] float nightTime;
-    float nightNumber;
+    [SerializeField] float nightNumber;
 
     [Header("Power")]
     public float maxPower = 1000f;
     public float power;
     public float usage = 1f;
 
-    [Header("Start")]
+    [Header("Start/End")]
     public GameObject fadeIn;
+
+    [Header("L Moment")]
+    public GameObject lMomentVid;
+    public VideoPlayer videoPlayer;
 
     public static GameManager Instance;
 
+    //essentially handles the dev commands of this game
+    void SpecialCommands()
+    {
+        /*if (Input.GetKeyDown(KeyCode.Q))
+        {
+            PlayerPrefs.SetFloat("Night", 0);
+        }*/
+        if (Input.GetKey(KeyCode.C))
+        {
+            if (Input.GetKey(KeyCode.G))
+            {
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    GameState = GameState.Win;
+                }
+                else if (Input.GetKeyDown(KeyCode.L))
+                {
+                    GameState = GameState.Lose;
+                }
+                else if (Input.GetKeyDown(KeyCode.P))
+                {
+                    power = 0;
+                }
+                else if (Input.GetKeyDown(KeyCode.J))
+                {
+                    GameState = GameState.Dying;
+                }
+            }
+        }
+    }
     void Awake()
     {
         Instance = this;
@@ -36,10 +71,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         nightTime = maxNightTime;
         power = maxPower;
     }
-    bool skullEmoji = false;
+    bool skullEmoji = false, fired = false;
     // Update is called once per frame
     void Update()
     {
+        SpecialCommands();
+
         if(nightHasStarted && !skullEmoji)
         {
             Night();
@@ -49,7 +86,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         if (GameState == GameState.Start)
         {
-            GameState = GameState.NotDeadYet;
+            StartCoroutine(FadeIn());
         }
         else if(GameState == GameState.NotDeadYet)
         {
@@ -61,16 +98,25 @@ public class GameManager : MonoBehaviour, IDataPersistence
             AnimatronicManager.Instance.allAnimsCanAttack = false;
             AudioManager.Instance.audioSource.Stop();
 
-            float nightNumber = PlayerPrefs.GetFloat("Night");
-            if (nightNumber == 1) nightNumber = 1;
-            if(nightNumber < 6) nightNumber++;            
-            this.nightNumber = nightNumber;
-            print("Next Night: " + this.nightNumber);
-            DataPersistenceManager.Instance.SaveGame();
-            PlayerPrefs.SetFloat("Night", nightNumber);
+            if (!fired)
+            {
+                float nightNumber = PlayerPrefs.GetFloat("Night");
+                if (nightNumber == 1) nightNumber = 1;
+                if (nightNumber < 6) nightNumber++;
+                this.nightNumber = nightNumber;
+                print("Next Night: " + this.nightNumber);
+                DataPersistenceManager.Instance.SaveGame();
+                PlayerPrefs.SetFloat("Night", nightNumber);
 
+                fired = true;
+            }
+
+            if (SceneManager.GetActiveScene().name == "Night 6")
+            {
+                PlayerPrefs.SetInt("Can Custom Night", 1);
+            }
             //play win sequence
-            SceneManager.LoadScene("MainMenu");
+            StartCoroutine(FadeOut());
         }
         else if(GameState == GameState.Dying)
         {
@@ -85,11 +131,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
             AudioManager.Instance.audioSource.Stop();
             skullEmoji = true;
 
-            if(SceneManager.GetActiveScene().name == "Night 6")
-            {
-                PlayerPrefs.SetInt("Can Custom Night", 1);
-            }
             //happens if jump scare
+            if(!fired)
+            {
+                if (AnimatronicManager.Instance.elijahAILevel == 20
+                    && AnimatronicManager.Instance.miaAILevel == 20
+                    && AnimatronicManager.Instance.jadeAILevel == 20
+                    && AnimatronicManager.Instance.shaunAILevel == 20
+                    && AnimatronicManager.Instance.enQiAILevel == 20
+                    && SceneManager.GetActiveScene().name == "Custom Night")
+                {
+                    //plays funny video before actually ending the game
+                    StartCoroutine(FadeOutLMoment());
+                }
+                else
+                {
+                    StartCoroutine(FadeOut());
+                }
+
+                fired = true;
+            }
         }
         else if(GameState == GameState.PowerOutage)
         {
@@ -98,6 +159,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             //play the lights out part
         }
     }
+
     //handles the night of the game
     void Night()
     {
@@ -124,8 +186,68 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
     IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(1f);
-        fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r, fadeIn.GetComponent<Image>().color.g, fadeIn.GetComponent<Image>().color.b, fadeIn.GetComponent<Image>().color.a);
+        yield return new WaitForSeconds(0.1f);
+        float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
+        if(fadeInAlpha > 0)
+        {
+            fadeInAlpha -= Time.deltaTime * 0.6f;
+            fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r, fadeIn.GetComponent<Image>().color.g, fadeIn.GetComponent<Image>().color.b, fadeInAlpha);
+        }
+        else
+        {
+            GameState = GameState.NotDeadYet;
+        }
+    }
+    IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(0.1f);
+        float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
+        if(fadeInAlpha <= 0)
+        {
+            fadeInAlpha += Time.deltaTime * 0.3f;
+            fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r,
+                                                           fadeIn.GetComponent<Image>().color.g,
+                                                           fadeIn.GetComponent<Image>().color.b,
+                                                           fadeInAlpha);
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+    IEnumerator FadeOutLMoment()
+    {
+        yield return new WaitForSeconds(0.1f);
+        float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
+        if(fadeInAlpha <= 0)
+        {
+            fadeInAlpha += Time.deltaTime * 0.3f;
+            fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r,
+                                                           fadeIn.GetComponent<Image>().color.g,
+                                                           fadeIn.GetComponent<Image>().color.b,
+                                                           fadeInAlpha);
+        }
+        else
+        {
+            lMomentVid.SetActive(true);
+
+            float length = videoPlayer.frameCount - 1;
+            while (true)
+            {
+                float currentLength = videoPlayer.frame;
+
+                print("current length: " + currentLength);
+                print("total: " + length);
+
+                if (currentLength == length)
+                {
+                    lMomentVid.SetActive(false);
+                    break;
+                }
+
+                yield return new WaitForSeconds(2f);
+            }
+        }
     }
 
     public void LoadData(CharacterDescriptionData data)
