@@ -10,6 +10,10 @@ public class ElijahAnimatronic : BaseAnimatronic
     public Sprite westHallwayRunning;
     public float setTimeTillDeath, timeTillDeath;
 
+    [Header("Elijah's Voicelines")]
+    public List<AudioClip> elijahVoicelines = new List<AudioClip>();
+    public AudioClip yourScrewed;
+
     public override void AnimatronicBehaviour()
     {
         ElijahMovement();
@@ -22,27 +26,42 @@ public class ElijahAnimatronic : BaseAnimatronic
     //however it is only 6 when they check the WEST HALLWAY CAM
     void ElijahMovement()
     {
+        int randomNumber = Random.Range(0, elijahVoicelines.Count);
         switch (counter)
         {
             case 0:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[0];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 1:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[1];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 2:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[2];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 3:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[3];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 4:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[4];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 5:
                 CamSystemManager.Instance.mainHall2BG = phaseImages[5];
+
+                queue.Add(elijahVoicelines[randomNumber]);
                 break;
             case 6:
+                queue.Add(yourScrewed);
+
                 ElijahAttack();
                 break;
         }

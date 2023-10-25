@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioSettingsKey;
 
 public class CamSystemManager : MonoBehaviour
 {
@@ -67,7 +68,7 @@ public class CamSystemManager : MonoBehaviour
     {
         songPlayer.SetActive(true);
         float presetDefaultVol = 1f;
-        AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetDefaultVol) * 20);
+        AudioManager.Instance.mixer.SetFloat(Keys.mixerInGame, Mathf.Log10(presetDefaultVol) * 20);
     }
     bool done = false;
     void StartingSong()
@@ -221,8 +222,8 @@ public class CamSystemManager : MonoBehaviour
             rightSideStuff.SetActive(true);
 
             songPlayer.SetActive(false);
-            float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
-            AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
+            float presetVol = PlayerPrefs.GetFloat(Keys.inGameKey, 1f);
+            AudioManager.Instance.mixer.SetFloat(Keys.mixerInGame, Mathf.Log10(presetVol) * 20);
         }
         //sets the initial cam that the player would be looking at
         if (!hasSentInitialCam)
@@ -238,8 +239,8 @@ public class CamSystemManager : MonoBehaviour
         typeOfCam = camtype;
         if (camtype != CamType.Storage && openOrClose)
         {
-            float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
-            AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
+            float presetVol = PlayerPrefs.GetFloat(Keys.inGameKey, 1f);
+            AudioManager.Instance.mixer.SetFloat(Keys.mixerInGame, Mathf.Log10(presetVol) * 20);
         }
         UIManager.Instance.ChangeCamName(camtype);
         switch (camtype)

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using PlayerPrefsKeys;
+using AudioSettingsKey;
 
 public class MenuManager : MonoBehaviour, IDataPersistence
 {
@@ -47,7 +49,6 @@ public class MenuManager : MonoBehaviour, IDataPersistence
 
     [Header("Continue")]
     public float night = 0f;
-    public const string nightKey = "Night";
     
     public Button continueButton;
 
@@ -57,8 +58,6 @@ public class MenuManager : MonoBehaviour, IDataPersistence
 
     public Transform buttonParent;
     public Button customNightButton;
-
-    public const string canCustomNight = "Can Custom Night";
 
     [Header("Command Prompt")]
     public GameObject commandPrompt;
@@ -119,7 +118,7 @@ public class MenuManager : MonoBehaviour, IDataPersistence
         {
             SongProgress(AudioManager.Instance.audioSource.time, current.length, current.name);
         }
-        if(PlayerPrefs.GetInt(canCustomNight) == 1)
+        if(PlayerPrefs.GetInt(PlayerPrefsKeys.Keys.canCustomNight) == 1)
         {
             customNightButton.gameObject.SetActive(true);
 
@@ -410,7 +409,7 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     }
     public void ContinueGame()
     {
-        night = PlayerPrefs.GetFloat(nightKey);
+        night = PlayerPrefs.GetFloat(PlayerPrefsKeys.Keys.nightKey);
         switch (night) 
         {
             default:
@@ -526,13 +525,13 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     //handles in game audio section
     public void InGameAudioLow()
     {
-        float presetVol = PlayerPrefs.GetFloat(AudioManager.inGameKey, 1f);
-        AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
+        float presetVol = PlayerPrefs.GetFloat(AudioSettingsKey.Keys.inGameKey, 1f);
+        AudioManager.Instance.mixer.SetFloat(AudioSettingsKey.Keys.mixerInGame, Mathf.Log10(presetVol) * 20);
     }
     public void InGameAudioNormal()
     {
         float presetVol = 1f;
-        AudioManager.Instance.mixer.SetFloat(AudioManager.mixerInGame, Mathf.Log10(presetVol) * 20);
+        AudioManager.Instance.mixer.SetFloat(AudioSettingsKey.Keys.mixerInGame, Mathf.Log10(presetVol) * 20);
     }
     //open/closes the settings
     public void OpenCloseSettings()
@@ -574,13 +573,22 @@ public class MenuManager : MonoBehaviour, IDataPersistence
     {
         PlayerPrefs.DeleteAll();
 
-        PlayerPrefs.SetFloat(nightKey, 1);
-        night = PlayerPrefs.GetFloat(nightKey);
+        PlayerPrefs.SetFloat(PlayerPrefsKeys.Keys.nightKey, 1);
+        night = PlayerPrefs.GetFloat(PlayerPrefsKeys.Keys.nightKey);
         DataPersistenceManager.Instance.SaveGame();
         continueButton.interactable = true;
 
-        PlayerPrefs.SetInt(canCustomNight, 0);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.Keys.canCustomNight, 0);
 
         SceneManager.LoadScene(loadScene);
     }
+}
+namespace PlayerPrefsKeys 
+{
+    public class Keys 
+    { 
+        public const string nightKey = "Night";
+        public const string canCustomNight = "Can Custom Night";
+    }
+    
 }

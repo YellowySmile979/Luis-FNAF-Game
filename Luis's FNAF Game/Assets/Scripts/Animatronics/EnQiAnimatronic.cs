@@ -11,6 +11,9 @@ public class EnQiAnimatronic : BaseAnimatronic
     public float setIdleTime = 5f, idleTime;
     [SerializeField] bool hasFirstSongPlayed, playing;
 
+    [Header("En Qi Voicelines")]
+    public List<AudioClip> enQiVoicelines = new List<AudioClip>();
+
     public override void AnimatronicBehaviour()
     {
         EnQiMovement();
@@ -70,6 +73,22 @@ public class EnQiAnimatronic : BaseAnimatronic
         if(current != null)
         {
             UIManager.Instance.SongPlayer(AudioManager.Instance.audioSource.time, current.length, current.name);
+
+            if(AudioManager.Instance.audioSource.time == current.length * 0.25)
+            {
+                int randomNumber = Random.Range(0, enQiVoicelines.Count);
+                queue.Add(enQiVoicelines[randomNumber]);
+            }
+            else if(AudioManager.Instance.audioSource.time == current.length * 0.5)
+            {
+                int randomNumber = Random.Range(0, enQiVoicelines.Count);
+                queue.Add(enQiVoicelines[randomNumber]);
+            }
+            else if(AudioManager.Instance.audioSource.time == current.length * 0.75)
+            {
+                int randomNumber = Random.Range(0, enQiVoicelines.Count);
+                queue.Add(enQiVoicelines[randomNumber]);
+            }
         }
         if (!AudioManager.Instance.audioSource.isPlaying && hasFirstSongPlayed)
         {

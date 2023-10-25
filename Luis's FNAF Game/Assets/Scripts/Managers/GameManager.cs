@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using PlayerPrefsKeys;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -100,20 +101,20 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
             if (!fired)
             {
-                float nightNumber = PlayerPrefs.GetFloat("Night");
+                float nightNumber = PlayerPrefs.GetFloat(Keys.nightKey);
                 if (nightNumber == 1) nightNumber = 1;
                 if (nightNumber < 6) nightNumber++;
                 this.nightNumber = nightNumber;
                 print("Next Night: " + this.nightNumber);
                 DataPersistenceManager.Instance.SaveGame();
-                PlayerPrefs.SetFloat("Night", nightNumber);
+                PlayerPrefs.SetFloat(Keys.nightKey, nightNumber);
 
                 fired = true;
             }
 
             if (SceneManager.GetActiveScene().name == "Night 6")
             {
-                PlayerPrefs.SetInt("Can Custom Night", 1);
+                PlayerPrefs.SetInt(Keys.canCustomNight, 1);
             }
             //play win sequence
             StartCoroutine(FadeOut());
@@ -241,7 +242,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
                 if (currentLength == length)
                 {
+                    yield return new WaitForSeconds(0.5f);
                     lMomentVid.SetActive(false);
+                    SceneManager.LoadScene("MainMenu");
                     break;
                 }
 

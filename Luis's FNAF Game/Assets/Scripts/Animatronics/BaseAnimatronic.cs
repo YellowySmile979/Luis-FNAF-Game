@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public abstract class BaseAnimatronic : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public abstract class BaseAnimatronic : MonoBehaviour
     public List<GameObject> listOfAllPlacesToMove = new List<GameObject>();
 
     [Header("Voicelines")]
-    public AudioClip miaVoicelines;
+    public AudioSource voiceSource;
+    public List<AudioClip> queue = new List<AudioClip>();
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +76,8 @@ public abstract class BaseAnimatronic : MonoBehaviour
         {
             SongCheckForEnQi();
         }
+
+        PlayVoicelines();
     }
 
     public virtual void AnimatronicBehaviour()
@@ -248,6 +252,30 @@ public abstract class BaseAnimatronic : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    bool inputted = false;
+    float totalPlaytime;
+    void PlayVoicelines()
+    {
+        if(queue != null)
+        {
+            if (!inputted)
+            {
+                voiceSource.PlayOneShot(queue[0]);
+                totalPlaytime = queue[0].length;
+
+                inputted = true;
+            }
+            if(totalPlaytime > 0)
+            {
+                totalPlaytime -= Time.deltaTime;
+            }
+            else
+            {
+                queue.Remove(queue[0]);
+                inputted = false;
+            }            
         }
     }
 }

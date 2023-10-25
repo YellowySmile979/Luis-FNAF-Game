@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class JadeAnimatronic : BaseAnimatronic
 {
+    [Header("Death")]
+    public float maxWaitTillDeath = 5f, waitTillDeath = 0f;
+
+    [Header("Jade Voicelines")]
+    public List<AudioClip> jadeVoicelines = new List<AudioClip>();
+    public AudioClip yourScrewed, westVent, eastVent, lucky;
+
     public override void AnimatronicBehaviour()
     {
         JadeMovement();
@@ -262,37 +269,74 @@ public class JadeAnimatronic : BaseAnimatronic
         }
         else if(AnimatronicManager.Instance.jade.transform.position == listOfAllPlacesToMove[9].transform.position)
         {
+            waitTillDeath = maxWaitTillDeath;
             JadeAttack();
+        }
+        if (whereIAmNow != listOfAllPlacesToMove[7]
+            || whereIAmNow != listOfAllPlacesToMove[6]
+            || whereIAmNow != listOfAllPlacesToMove[9])
+        {
+            float random = Random.Range(0, 100);
+            if (random < 30)
+            {
+                int randomVoicelines = Random.Range(0, jadeVoicelines.Count);
+                queue.Add(jadeVoicelines[randomVoicelines]);
+            }
+        }
+        if(whereIAmNow == listOfAllPlacesToMove[7])
+        {
+            queue.Add(westVent);
+        }
+        else if(whereIAmNow == listOfAllPlacesToMove[6])
+        {
+            queue.Add(eastVent);
+        }
+        else if(whereIAmNow == listOfAllPlacesToMove[9])
+        {
+            queue.Add(yourScrewed);
         }
     }
     void JadeAttack()
     {
-        float randomNumber = Random.Range(1, 100);
-        if (randomNumber <= 99)
+        if (waitTillDeath <= 0)
         {
-            GameManager.Instance.GameState = GameState.Dying;
-            //jade attacks
-            PlayJadeAnimation();
-        }
-        else
-        {
-            float randomNo = Random.Range(1, 100);
-            if (randomNo <= 50)
+            float randomNumber = Random.Range(1, 100);
+            if (randomNumber <= 99)
             {
-                //from Office vent to East Hallway vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[6].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[6];
+                GameManager.Instance.GameState = GameState.Dying;
+                //jade attacks
+                PlayJadeAnimation();
             }
             else
             {
-                //from Office vent to West Hallway vent
-                AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[7].transform.position;
-                whereIAmNow = listOfAllPlacesToMove[7];
+                queue.Add(lucky);
+
+                float randomNo = Random.Range(1, 100);
+                if (randomNo <= 50)
+                {
+                    //from Office vent to East Hallway vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[6].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[6];
+                }
+                else
+                {
+                    //from Office vent to West Hallway vent
+                    AnimatronicManager.Instance.jade.transform.position = listOfAllPlacesToMove[7].transform.position;
+                    whereIAmNow = listOfAllPlacesToMove[7];
+                }
             }
         }
     }
     void PlayJadeAnimation()
     {
         GameManager.Instance.GameState = GameState.Lose;
+    }
+
+    void FixedUpdate()
+    {
+        if(waitTillDeath > 0)
+        {
+            waitTillDeath -= Time.deltaTime;
+        }
     }
 }
