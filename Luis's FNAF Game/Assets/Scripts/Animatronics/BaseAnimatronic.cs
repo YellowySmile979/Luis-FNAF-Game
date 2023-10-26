@@ -258,11 +258,11 @@ public abstract class BaseAnimatronic : MonoBehaviour
     float totalPlaytime;
     void PlayVoicelines()
     {
-        if(queue != null)
+        if(queue != null || queue[0] != null)
         {
             if (!inputted)
             {
-                voiceSource.PlayOneShot(queue[0]);
+                AudioManager.Instance.audioSource.PlayOneShot(queue[0]);
                 totalPlaytime = queue[0].length;
 
                 inputted = true;
@@ -276,6 +276,10 @@ public abstract class BaseAnimatronic : MonoBehaviour
                 queue.Remove(queue[0]);
                 inputted = false;
             }            
+        }
+        else
+        {
+            print("Queue is empty");
         }
     }
 }

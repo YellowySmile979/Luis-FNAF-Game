@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     [Header("Start/End")]
     public GameObject fadeIn;
+    public Image deathScreen;
 
     [Header("L Moment")]
     public GameObject lMomentVid;
@@ -192,7 +193,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if(fadeInAlpha > 0)
         {
             fadeInAlpha -= Time.deltaTime * 0.6f;
-            fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r, fadeIn.GetComponent<Image>().color.g, fadeIn.GetComponent<Image>().color.b, fadeInAlpha);
+            fadeIn.GetComponent<Image>().color = new Color(fadeIn.GetComponent<Image>().color.r,
+                                                           fadeIn.GetComponent<Image>().color.g,
+                                                           fadeIn.GetComponent<Image>().color.b,
+                                                           fadeInAlpha);
         }
         else
         {
@@ -203,6 +207,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         yield return new WaitForSeconds(0.1f);
         float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
+        float deathScreenAlpha = deathScreen.color.a;
         if(fadeInAlpha <= 0)
         {
             fadeInAlpha += Time.deltaTime * 0.3f;
@@ -213,7 +218,35 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
         else
         {
-            SceneManager.LoadScene("MainMenu");
+            int counter = 0; bool fired = false;
+            if (deathScreenAlpha <= 0 && counter == 0)
+            {
+                deathScreenAlpha += Time.deltaTime * 0.5f;
+                deathScreen.color = new Color(deathScreen.color.r,
+                                              deathScreen.color.g,
+                                              deathScreen.color.b,
+                                              deathScreenAlpha);
+                if(!fired)
+                {
+                    counter++;
+                    fired = true;
+                }
+            }
+            else
+            {
+                yield return new WaitForSeconds(2f);
+                deathScreenAlpha -= Time.deltaTime * 0.5f;
+                deathScreen.color = new Color(deathScreen.color.r,
+                                            deathScreen.color.g,
+                                            deathScreen.color.b,
+                                            deathScreenAlpha);
+
+                if(deathScreenAlpha <= 0 && counter == 1)
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    SceneManager.LoadScene("MainMenu");
+                }
+            }            
         }
     }
     IEnumerator FadeOutLMoment()
