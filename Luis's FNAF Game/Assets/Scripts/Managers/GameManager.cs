@@ -200,11 +200,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
         else
         {
+            fadeIn.SetActive(false);
             GameState = GameState.NotDeadYet;
         }
     }
     IEnumerator FadeOut()
     {
+        fadeIn.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
         float deathScreenAlpha = deathScreen.color.a;
@@ -251,6 +253,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
     IEnumerator FadeOutLMoment()
     {
+        fadeIn.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         float fadeInAlpha = fadeIn.GetComponent<Image>().color.a;
         if(fadeInAlpha <= 0)

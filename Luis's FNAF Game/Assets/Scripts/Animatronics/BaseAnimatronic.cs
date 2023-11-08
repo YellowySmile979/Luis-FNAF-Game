@@ -77,7 +77,7 @@ public abstract class BaseAnimatronic : MonoBehaviour
             SongCheckForEnQi();
         }
 
-        PlayVoicelines();
+        //PlayVoicelines();
     }
 
     public virtual void AnimatronicBehaviour()
